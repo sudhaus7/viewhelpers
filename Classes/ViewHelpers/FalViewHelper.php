@@ -1,5 +1,5 @@
 <?php
-namespace BFACTOR\BfactorViewhelpers\ViewHelpers;
+namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
 class FalViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
     /**
      * Return the content of an FAL-Element

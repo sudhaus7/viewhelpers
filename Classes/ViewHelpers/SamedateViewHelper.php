@@ -6,7 +6,7 @@
  * Time: 10:42
  */
 
-namespace BFACTOR\BfactorViewhelpers\ViewHelpers;
+namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
 
 
 class SamedateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper {

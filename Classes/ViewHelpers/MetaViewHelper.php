@@ -6,7 +6,7 @@
  * Time: 09:43
  */
 
-namespace BFACTOR\BfactorViewhelpers\ViewHelpers;
+namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
 
 class MetaViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
@@ -50,8 +50,8 @@ class MetaViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
      *
      */
     public function render($key, $value, $auto = true) {
-        if (!isset($GLOBALS['BFACTOR_META_REGISTRY'])) $GLOBALS['BFACTOR_META_REGISTRY'] = array();
-        self::handler($GLOBALS['BFACTOR_META_REGISTRY'], $key, $value, $auto);
+        if (!isset($GLOBALS['SUDHAUS7_META_REGISTRY'])) $GLOBALS['SUDHAUS7_META_REGISTRY'] = array();
+        self::handler($GLOBALS['SUDHAUS7_META_REGISTRY'], $key, $value, $auto);
         return;
     }
 

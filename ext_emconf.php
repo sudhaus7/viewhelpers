@@ -1,10 +1,10 @@
 <?php
 $EM_CONF[$_EXTKEY] = array(
-    'title' => '(B-Factor) View Helpers',
+    'title' => '(Sudhaus7) View Helpers',
     'description' => '',
     'category' => 'fe',
     'author' => 'Markus Hofmann',
-    'author_email' => 'mhofmann@b-factor.de',
+    'author_email' => 'mhofmann@sudhaus7.de',
     'shy' => '',
     'dependencies' => 'cms',
     'conflicts' => '',

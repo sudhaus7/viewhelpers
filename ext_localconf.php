@@ -2,9 +2,9 @@
 
 // Hook for manipulating Header Info
 
-$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-postProcess'][] = "BFACTOR\\BfactorViewhelpers\\Hooks\\RenderPostProcessHook->render";
+$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-postProcess'][] = "SUDHAUS7\\Sudhaus7Viewhelpers\\Hooks\\RenderPostProcessHook->render";
 
-$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['BfactorViewhelpers']['RenderPostProcessHook']['0000-' . $_EXTKEY] = 'BFACTOR\\BfactorViewhelpers\\Hooks\\MetaPostProcessHook->attach';
+$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Sudhaus7Viewhelpers']['RenderPostProcessHook']['0000-' . $_EXTKEY] = 'SUDHAUS7\\Sudhaus7Viewhelpers\\Hooks\\MetaPostProcessHook->attach';
 
 
 if (!is_array($TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['bfactorviewhelpers_metatags'])) {

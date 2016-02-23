@@ -6,7 +6,7 @@
  * Time: 09:44
  */
 
-namespace BFACTOR\BfactorViewhelpers\Hooks;
+namespace SUDHAUS7\Sudhaus7Viewhelpers\Hooks;
 
 
 class MetaPostProcessHook {
@@ -37,9 +37,9 @@ class MetaPostProcessHook {
             $aMeta = $a;
         }
 
-        if (empty($aMeta) && isset($GLOBALS['BFACTOR_META_REGISTRY']) && is_array($GLOBALS['BFACTOR_META_REGISTRY'])) {
-            ksort($GLOBALS['BFACTOR_META_REGISTRY']);
-            foreach ($GLOBALS['BFACTOR_META_REGISTRY'] as $key=>$value) {
+        if (empty($aMeta) && isset($GLOBALS['SUDHAUS7_META_REGISTRY']) && is_array($GLOBALS['SUDHAUS7_META_REGISTRY'])) {
+            ksort($GLOBALS['SUDHAUS7_META_REGISTRY']);
+            foreach ($GLOBALS['SUDHAUS7_META_REGISTRY'] as $key=>$value) {
                 if (strpos($key,'image')!==false) $value = $conf['params']['baseUrl'].$value;
                 list($prop, $key) = self::checkType($key);
                 $aMeta[$key] = array(

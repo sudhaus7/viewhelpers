@@ -1,7 +1,7 @@
 {
   "autoload": {
     "psr-4": {
-      "BFACTOR\\BfactorViewhelpers\\": "Classes/"
+      "SUDHAUS7\\Sudhaus7Viewhelpers\\": "Classes/"
     }
   }
 }

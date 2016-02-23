@@ -1,5 +1,5 @@
 <?php
-namespace BFACTOR\BfactorViewhelpers\ViewHelpers\Collection;
+namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers\Collection;
 class LastViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
     /**
      * Return the last Element of an array

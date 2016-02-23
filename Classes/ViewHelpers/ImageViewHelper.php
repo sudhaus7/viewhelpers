@@ -6,7 +6,7 @@
  * Time: 11:57
  */
 
-namespace BFACTOR\BfactorViewhelpers\ViewHelpers;
+namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
 use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Extbase\Domain\Model\AbstractFileFolder;

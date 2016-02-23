@@ -1,5 +1,5 @@
 <?php
-namespace BFACTOR\BfactorViewhelpers\ViewHelpers\Collection;
+namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers\Collection;
 class FirstViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
     /**
      * Return the first element of an array

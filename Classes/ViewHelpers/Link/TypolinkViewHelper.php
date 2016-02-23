@@ -6,7 +6,7 @@
  * Time: 15:54
  */
 
-namespace BFACTOR\BfactorViewhelpers\ViewHelpers\Link;
+namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers\Link;
 
 
 class TypolinkViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {

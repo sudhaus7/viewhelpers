@@ -1,5 +1,5 @@
 <?php
-namespace BFACTOR\BfactorViewhelpers\ViewHelpers;
+namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
 class DummyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
     /**
      * Return an array for creating dummy content

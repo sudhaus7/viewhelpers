@@ -1,6 +1,6 @@
 <?php
 
-namespace BFACTOR\BfactorViewhelpers\Hooks;
+namespace SUDHAUS7\Sudhaus7Viewhelpers\Hooks;
 
 
 class RenderPostProcessHook {
@@ -68,9 +68,9 @@ class RenderPostProcessHook {
                 }
             }
             // Hook for extensions to manipulate meta tags, beware to check if you are on page with your extension
-            if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['BfactorViewhelpers']['RenderPostProcessHook'])) {
-                ksort($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['BfactorViewhelpers']['RenderPostProcessHook'], SORT_NATURAL);
-                foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['BfactorViewhelpers']['RenderPostProcessHook'] as $hook) {
+            if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Sudhaus7Viewhelpers']['RenderPostProcessHook'])) {
+                ksort($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Sudhaus7Viewhelpers']['RenderPostProcessHook'], SORT_NATURAL);
+                foreach ($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Sudhaus7Viewhelpers']['RenderPostProcessHook'] as $hook) {
                     $passArguments = array('params' => $params, 'metaArray' => $metaArray);
 
                     $metaArray = \TYPO3\CMS\Core\Utility\GeneralUtility::callUserFunction($hook, $passArguments, $pObj);

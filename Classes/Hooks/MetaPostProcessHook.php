@@ -15,7 +15,7 @@ class MetaPostProcessHook {
 
     public function __construct() {
 
-        $this->extcache = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Cache\\CacheManager')->getCache('bfactorviewhelpers_metatags');
+        $this->extcache = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Cache\\CacheManager')->getCache('sudhaus7viewhelpers_metatags');
     }
 
     /**

@@ -7,8 +7,8 @@ $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php'][
 $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Sudhaus7Viewhelpers']['RenderPostProcessHook']['0000-' . $_EXTKEY] = 'SUDHAUS7\\Sudhaus7Viewhelpers\\Hooks\\MetaPostProcessHook->attach';
 
 
-if (!is_array($TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['bfactorviewhelpers_metatags'])) {
-    $TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['bfactorviewhelpers_metatags'] = array(
+if (!is_array($TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['sudhaus7viewhelpers_metatags'])) {
+    $TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['sudhaus7viewhelpers_metatags'] = array(
         'backend' => 'TYPO3\\CMS\\Core\\Cache\\Backend\\Typo3DatabaseBackend',
         'frontend' => 'TYPO3\\CMS\\Core\\Cache\\Frontend\\VariableFrontend',
         'groups' => array('pages'),

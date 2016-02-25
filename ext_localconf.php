@@ -15,4 +15,3 @@ if (!is_array($TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['sudhaus
         'options' => array('defaultLifetime' => 0),
     );
 }
-

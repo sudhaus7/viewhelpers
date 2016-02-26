@@ -13,25 +13,25 @@ class RenderPostProcessHook {
     public function render(&$params, &$pObj) {
         if (TYPO3_MODE == "FE") {
             $page = $GLOBALS['TSFE']->page;
-            $params['title'] = implode(': ',array_reverse(explode(': ',$params['title'])));
+            $params['title'] = implode(': ', array_reverse(explode(': ', $params['title'])));
             $metaArray = array(
-                'og:title'=>array(
+                'og:title' => array(
                     'property' => 'og:title',
                     'content' => $params['title']
                 ),
-                'og:description'=>array(
+                'og:description' => array(
                     'property' => 'og:description',
                     'content' => $page['description']
                 ),
-                'og:type'=>array(
+                'og:type' => array(
                     'property' => 'og:type',
                     'content' => 'website'
                 ),
-                'description'=>array(
+                'description' => array(
                     'name' => 'description',
                     'content' => $page['description']
                 ),
-                'keywords'=>array(
+                'keywords' => array(
                     'name' => 'keywords',
                     'content' => $page['keywords']
                 )
@@ -56,11 +56,11 @@ class RenderPostProcessHook {
                 LIMIT 3
             ';
 
-            $ret = $GLOBALS['TYPO3_DB']->sql_query(sprintf($query,$page['uid']));
-            while($res = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($ret)) {
+            $ret = $GLOBALS['TYPO3_DB']->sql_query(sprintf($query, $page['uid']));
+            while ($res = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($ret)) {
                 // actually only works with fileadmin
                 if ($res['storage'] == 1) {
-                    $image = $params['baseUrl']."fileadmin" . $res['identifier'];
+                    $image = $params['baseUrl'] . "fileadmin" . $res['identifier'];
                     $metaArray['og:image'] = array(
                         'property' => 'og:image',
                         'content' => $image

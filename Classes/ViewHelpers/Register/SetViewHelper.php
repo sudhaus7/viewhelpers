@@ -19,11 +19,11 @@ class SetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper 
      * @throws nothing
      */
     public function render() {
-        if (!isset($GLOBALS['SUDHAUS7_FLUID_REGISTER'])) $GLOBALS['SUDHAUS7_FLUID_REGISTER'] = array();
+
         if (empty($this->arguments['value'])) {
-            if (isset($GLOBALS['SUDHAUS7_FLUID_REGISTER'][$this->arguments['key']])) unset($GLOBALS['SUDHAUS7_FLUID_REGISTER'][$this->arguments['key']]);
+            if (isset($GLOBALS["TSFE"]->register[$this->arguments['key']])) unset($GLOBALS["TSFE"]->register[$this->arguments['key']]);
         } else {
-            $GLOBALS['SUDHAUS7_FLUID_REGISTER'][$this->arguments['key']] = $this->arguments['value'];
+            $GLOBALS["TSFE"]->register[$this->arguments['key']] = $this->arguments['value'];
         }
     }
 }

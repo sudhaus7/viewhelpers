@@ -19,9 +19,9 @@ class GetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper 
      */
     public function render() {
 
-        if (!isset($GLOBALS['SUDHAUS7_FLUID_REGISTER'])) $GLOBALS['SUDHAUS7_FLUID_REGISTER'] = array();
+        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS["TSFE"]->register);
 
-        if (isset($GLOBALS['SUDHAUS7_FLUID_REGISTER'][$this->arguments['key']])) return($GLOBALS['SUDHAUS7_FLUID_REGISTER'][$this->arguments['key']]);
+        if (isset($GLOBALS["TSFE"]->register[$this->arguments['key']])) return($GLOBALS["TSFE"]->register[$this->arguments['key']]);
 
         return false;
     }

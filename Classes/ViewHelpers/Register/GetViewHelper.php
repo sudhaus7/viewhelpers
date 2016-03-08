@@ -19,7 +19,6 @@ class GetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper 
      */
     public function render() {
 
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS["TSFE"]->register);
 
         if (isset($GLOBALS["TSFE"]->register[$this->arguments['key']])) return($GLOBALS["TSFE"]->register[$this->arguments['key']]);
 

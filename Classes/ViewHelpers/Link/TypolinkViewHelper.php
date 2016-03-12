@@ -13,6 +13,8 @@ class TypolinkViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
     public function initializeArguments() {
         $this->registerArgument('configuration', 'array', 'The typoLink configuration', TRUE);
         $this->registerArgument('class', 'string', 'Class Defintions', FALSE,'');
+        $this->registerArgument('title', 'string', 'Title attribute', FALSE,'');
+        $this->registerArgument('target', 'string', 'target attribute', FALSE,'');
         $this->registerArgument('return', 'int', 'Return the link', FALSE,0);
     }
     /**
@@ -23,6 +25,22 @@ class TypolinkViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
         if ($this->arguments['class']) {
             if (!isset($this->arguments['configuration']['ATagParams'])) {
                 $this->arguments['configuration']['ATagParams'] = ' class="'.$this->arguments['class'].'"';
+            }
+        }
+        if ($this->arguments['title']) {
+            if (!isset($this->arguments['configuration']['target'])) {
+                $this->arguments['configuration']['target'] = $this->arguments['target'];
+            }
+            if (!isset($this->arguments['configuration']['fileTarget'])) {
+                $this->arguments['configuration']['fileTarget'] = $this->arguments['target'];
+            }
+            if (!isset($this->arguments['configuration']['extTarget'])) {
+                $this->arguments['configuration']['extTarget'] = $this->arguments['target'];
+            }
+        }
+        if ($this->arguments['target']) {
+            if (!isset($this->arguments['configuration']['title'])) {
+                $this->arguments['configuration']['title'] = $this->arguments['title'];
             }
         }
         if ($this->arguments['return']) {

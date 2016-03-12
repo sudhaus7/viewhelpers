@@ -99,6 +99,13 @@ class RenderPostProcessHook {
             }
             $newMeta[] = '<link rel="canonical" href="' . $metaArray['og:url']['content'] . '" />';
             $params['headerData'] = array_merge($params['headerData'], $newMeta);
+            if (isset($GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY']) && !empty($GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY'])) {
+                foreach ($GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY'] as $k=>$v) {
+                    if (isset($params[$k]) && !empty($v)) $params[$k] .= $v;
+                }
+            }
+
+
             return;
         }
     }

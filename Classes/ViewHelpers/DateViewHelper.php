@@ -84,7 +84,7 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
             $dateTime = new \DateTime();
             $dateTime->setTimestamp($date);
         }
-        if ($format == 'SOLR') {
+        if ($format == 'SOLR' || $format == 'XML') {
             $dateTime->setTimezone(new \DateTimeZone('Europe/London'));
             return $dateTime->format('Y-m-d\TH:i:s\Z');
         }

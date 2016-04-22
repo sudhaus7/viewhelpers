@@ -746,6 +746,26 @@
             </xsd:attribute>
         </xsd:complexType>
     </xsd:element>
+    <xsd:element name="mediaproperty">
+        <xsd:annotation>
+            <xsd:documentation><![CDATA[]]></xsd:documentation>
+        </xsd:annotation>
+        <xsd:complexType mixed="true">
+            <xsd:sequence>
+                <xsd:any minOccurs="0" maxOccurs="1"/>
+            </xsd:sequence>
+            <xsd:attribute type="xsd:anySimpleType" name="file" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[The File Reference]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute type="xsd:string" name="property" use="required">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[The Property to read]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+        </xsd:complexType>
+    </xsd:element>
     <xsd:element name="meta">
         <xsd:annotation>
             <xsd:documentation><![CDATA[]]></xsd:documentation>

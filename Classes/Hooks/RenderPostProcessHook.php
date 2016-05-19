@@ -105,7 +105,8 @@ class RenderPostProcessHook {
                 }
             }
 
-
+            $params['bodyContent'] = str_replace('###CANONICALURL###', urlencode($metaArray['og:url']['content']), $params['bodyContent']);
+ 
             return;
         }
     }

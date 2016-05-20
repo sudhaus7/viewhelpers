@@ -15,6 +15,7 @@ class LastViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
             throw new \TYPO3\CMS\Fluid\Core\ViewHelper\Exception('LastViewHelper only supports arrays and objects implementing a toArray Method', 1248728393);
         }
         if (is_object($data)) $data = $data->toArray();
+        if (empty($data)) return '';
         $elem = array_pop($data);
         $renderChildrenClosure =  $this->buildRenderChildrenClosure();
         $templateVariableContainer = $this->renderingContext->getTemplateVariableContainer();

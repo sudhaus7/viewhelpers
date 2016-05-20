@@ -27,7 +27,7 @@ class GetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper 
         }
         if (is_object($data)) $data = $data->toArray();
         //$elem = array_shift($data);
-
+        if (empty($data)) return '';
         if (!isset($data[$key])) return null;
         if ($direct) return $data[$key];
         $output = '';

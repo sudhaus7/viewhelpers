@@ -16,6 +16,7 @@ class FirstViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelpe
             throw new \TYPO3\CMS\Fluid\Core\ViewHelper\Exception('FirstViewHelper only supports arrays and objects implementing a toArray Method', 1248728393);
         }
         if (is_object($data)) $data = $data->toArray();
+        if (empty($data)) return '';
         $elem = array_shift($data);
         $renderChildrenClosure =  $this->buildRenderChildrenClosure();
         $templateVariableContainer = $this->renderingContext->getTemplateVariableContainer();

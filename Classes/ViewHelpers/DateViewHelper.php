@@ -80,6 +80,8 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 
         if (is_object($date)) {
             $dateTime = $date;
+        } else if ($date == 'now') {
+            $dateTime = new \DateTime('now');
         } else {
             $dateTime = new \DateTime();
             $dateTime->setTimestamp($date);

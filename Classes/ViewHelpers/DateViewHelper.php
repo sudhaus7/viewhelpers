@@ -66,7 +66,7 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
     /**
      * Return an array for creating dummy content
      *
-     * @param int $date date to convert
+     * @param mixed $date date to convert
      * @param string $format format to map for
      * @param int $respectlocale Use Locale Setting
      * @param string $length short,medium,long,full. Example for September: short=09,medium=Sep,long=September,full=September

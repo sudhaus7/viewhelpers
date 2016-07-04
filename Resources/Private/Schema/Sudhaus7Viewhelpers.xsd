@@ -764,6 +764,16 @@
                     <xsd:documentation><![CDATA[The Property to read]]></xsd:documentation>
                 </xsd:annotation>
             </xsd:attribute>
+            <xsd:attribute type="xsd:string" name="prepend" use="optional" default="''">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[Prepend Text]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
+            <xsd:attribute type="xsd:string" name="append" use="optional" default="''">
+                <xsd:annotation>
+                    <xsd:documentation><![CDATA[Append Text]]></xsd:documentation>
+                </xsd:annotation>
+            </xsd:attribute>
         </xsd:complexType>
     </xsd:element>
     <xsd:element name="meta">

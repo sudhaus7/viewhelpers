@@ -3,7 +3,6 @@
 namespace SUDHAUS7\Sudhaus7Viewhelpers\Hooks;
 
 
-use SUDHAUS7\Sudhaus7Base\Tools\Globals;
 
 class RenderPostProcessHook {
     /**

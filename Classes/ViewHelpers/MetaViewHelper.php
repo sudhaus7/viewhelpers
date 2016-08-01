@@ -63,7 +63,7 @@ class MetaViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 
             $value = GeneralUtility::getFileAbsFileName($value);
             $value = str_replace(PATH_site, '', $value);
-            if (substr($value,0,4)!='http') $value = $_SERVER['HTTPS'] ? 'https://' : 'http://' . $_SERVER['HTTP_HOST'] . '/' .$value;
+            if (substr($value,0,4)!='http') $value = ($_SERVER['HTTPS'] ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'] . '/' .$value;
         }
         if ($auto) {
             if (isset(self::$plain[$key])) $a[self::$plain[$key]] = $value;

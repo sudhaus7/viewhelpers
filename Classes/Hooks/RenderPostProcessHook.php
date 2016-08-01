@@ -112,7 +112,9 @@ class RenderPostProcessHook {
             }
 
             $params['bodyContent'] = str_replace('###CANONICALURL###', urlencode($metaArray['og:url']['content']), $params['bodyContent']);
- 
+            foreach($params['headerData'] as $k=>$v) {
+                $params['headerData'][$k]=   str_replace('###CANONICALURL###', $metaArray['og:url']['content'],$v);
+            }
             return;
         }
     }

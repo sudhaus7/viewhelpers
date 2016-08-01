@@ -19,8 +19,8 @@ class AddafterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
      */
     public function render() {
 
-        if (!isset($GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY'])) $GLOBALS['SUDHAUS7_META_REGISTRY'] = array();
-        if (!isset($GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY'][$this->arguments['section']])) $GLOBALS['SUDHAUS7_META_REGISTRY'][$this->arguments['section']] = '';
+        if (!isset($GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY'])) $GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY'] = array();
+        if (!isset($GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY'][$this->arguments['section']])) $GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY'][$this->arguments['section']] = '';
 
         if (!empty($this->arguments['content'])) {
             $GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY'][$this->arguments['section']] .= $this->arguments['content'];

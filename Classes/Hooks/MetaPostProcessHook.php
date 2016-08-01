@@ -33,7 +33,7 @@ class MetaPostProcessHook {
 
         $aMeta = array();
         $cacheKey = isset($_GET['cHash']) && !empty($_GET['cHash']) ? $_GET['cHash'] . '_'. $tsfe->id .'_'.$tsfe->sys_language_uid : 'pageId_' . $tsfe->id .'_'.$tsfe->sys_language_uid;
-        if ($this->extcache && $a = $this->extcache->get($cacheKey)) {
+        if ($this->extcache && !isset($_REQUEST['no_cache']) && $a = $this->extcache->get($cacheKey)) {
             $aMeta = $a;
         }
 

@@ -9,6 +9,8 @@
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
 
 
+
+
 class MediapropertyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
     public function initializeArguments()
@@ -22,8 +24,13 @@ class MediapropertyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
     public function render()
     {
         $s = '';
-        if (get_class($this->arguments['file']) == \TYPO3\CMS\Core\Resource\FileReference::class) {
-            $s = $this->arguments['file']->getProperty($this->arguments['property']);
+
+        $file = $this->arguments['file'];
+        if (get_class($file)==\TYPO3\CMS\Extbase\Domain\Model\FileReference::class) {
+            $file = new \TYPO3\CMS\Core\Resource\FileReference(['uid_local'=>$file->getUid()]);
+        }
+        if (get_class($file) == \TYPO3\CMS\Core\Resource\FileReference::class) {
+            $s = $file->getProperty($this->arguments['property']);
         }
         if (!empty($s)) {
             if (!empty($this->arguments['prepend'])) $s = $this->arguments['prepend'] . $s;

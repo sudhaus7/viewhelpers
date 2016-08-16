@@ -17,6 +17,11 @@ class FalViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper 
      *
      */
     public function render($data, $table = 'tt_content', $field = 'image',$foreign='uid_foreign', $return=0, $as="properties", $retidx=-1) {
+
+
+
+
+
         if ($data instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
 
             $tmp = $data;
@@ -52,6 +57,7 @@ class FalViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper 
                 if (isset($ret[$k]) && empty($ret[$k])) $ret[$k]=$v;
                 if (!isset($ret[$k])) $ret[$k]=$v;
             }
+
             $images[] = $ret;
         }
         if ($return) return $images;
@@ -79,6 +85,24 @@ class FalViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper 
         return $output;
 
     }
+
+    /**
+     * When retrieving the height or width for a media file
+     * a possible cropping needs to be taken into account.
+     *
+     * @param FileInterface $fileObject
+     * @param string $dimensionalProperty 'width' or 'height'
+     * @return int
+     */
+    protected function getCroppedDimensionalProperty($data, $dimensionalProperty)
+    {
+        if (!isset($data['crop']) || empty($data['crop'])) {
+            return $data[$dimensionalProperty];
+        }
+        $croppingConfiguration = json_decode($data['crop'], true);
+        return (int)$croppingConfiguration[$dimensionalProperty];
+    }
+
 
 
 }

@@ -87,7 +87,6 @@ class ImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper {
             'processed'=>$processedImage,
             'width'=>$processedImage->getProperty('width'),
             'height'=>$processedImage->getProperty('height')
-
         );
 
 

@@ -32,10 +32,10 @@ class TypolinkViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
                 $this->arguments['configuration']['target'] = $this->arguments['target'];
             }
             if (!isset($this->arguments['configuration']['fileTarget'])) {
-                $this->arguments['configuration']['fileTarget'] = isset($this->arguments['target']) ? $this->arguments['target'] : '_blank';
+                $this->arguments['configuration']['fileTarget'] = '_blank';
             }
             if (!isset($this->arguments['configuration']['extTarget'])) {
-                $this->arguments['configuration']['extTarget'] = isset($this->arguments['target']) ? $this->arguments['target'] : '_blank';
+                $this->arguments['configuration']['extTarget'] = '_blank';
             }
         }
         if ($this->arguments['target']) {

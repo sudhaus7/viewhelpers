@@ -27,7 +27,7 @@ class TypolinkViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
                 $this->arguments['configuration']['ATagParams'] = ' class="'.$this->arguments['class'].'"';
             }
         }
-
+/*
         if (!isset($this->arguments['configuration']['target'])) {
             $this->arguments['configuration']['target'] = isset($this->arguments['target']) ? $this->arguments['target'] : '';
         }
@@ -37,7 +37,7 @@ class TypolinkViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
         if (!isset($this->arguments['configuration']['extTarget'])) {
             $this->arguments['configuration']['extTarget'] = isset($this->arguments['target']) ? $this->arguments['target'] : '_blank';
         }
-
+*/
         if ($this->arguments['title']) {
             if (!isset($this->arguments['configuration']['title'])) {
                 $this->arguments['configuration']['title'] = $this->arguments['title'];

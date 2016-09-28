@@ -19,7 +19,6 @@ class RowcounterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractView
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException
      */
     public function render($idx,$maxitems) {
-
         return ceil($idx/$maxitems);
     }
 }

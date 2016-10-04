@@ -201,7 +201,7 @@ class YoutubemodalViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\MediaViewHelpe
             }
         }
 
-        return [$src,'https://img.youtube.com/vi/'.$videoId.'/hqdefault.jpg'];
+        return [$src,'https://img.youtube.com/vi/'.$videoId.'/maxresdefault.jpg'];
 
 
     }

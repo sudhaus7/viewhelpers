@@ -32,7 +32,11 @@ class MediapropertyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
             $s = $file[$this->arguments['property']];
         } else {
             if (get_class($file) == \TYPO3\CMS\Extbase\Domain\Model\FileReference::class) {
-                $file = new \TYPO3\CMS\Core\Resource\FileReference(['uid_local' => $file->getOriginalResource()->getUid()]);
+                try {
+                    $file = new \TYPO3\CMS\Core\Resource\FileReference(['uid_local' => $file->getOriginalResource()->getUid()]);
+                } catch (\Exception $e) {
+                    return '';
+                }
             }
             if (get_class($file) == \TYPO3\CMS\Core\Resource\FileReference::class) {
                 $s = $file->getProperty($this->arguments['property']);

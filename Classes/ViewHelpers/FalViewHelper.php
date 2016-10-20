@@ -10,18 +10,13 @@ class FalViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper 
      * @param string $foreign the field containing the id
      * @param bool $return return the data, do not render it
      * @param string $as the variable in the render block
-     * @param string $retidx default -1 return all values with foreach, > -1 return that index only
+     * @param int $retidx default -1 return all values with foreach, > -1 return that index only
      * @return array
      *
      * @throws nothing
      *
      */
-    public function render($data, $table = 'tt_content', $field = 'image',$foreign='uid_foreign', $return=0, $as="properties", $retidx=-1) {
-
-
-
-
-
+    public function render($data, $table = 'tt_content', $field = 'image',$foreign='uid_foreign', $return = false, $as="properties", $retidx=-1) {
         if ($data instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
 
             $tmp = $data;
@@ -46,7 +41,6 @@ class FalViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper 
 
             $resfile = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*','sys_file','uid='.$ret['uid_local']);
             $rowfile = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($resfile);
-
 
             $resstorage = $GLOBALS['TYPO3_DB']->sql_query('select ExtractValue(configuration,\'//field[@index="basePath"]/value\') as base from sys_file_storage where uid='.$rowfile['storage']);
             $rowstorage =  $GLOBALS['TYPO3_DB']->sql_fetch_row($resstorage);

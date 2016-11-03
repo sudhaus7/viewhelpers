@@ -1,5 +1,7 @@
 <?php
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+
 class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
     /**
      * @var array
@@ -68,6 +70,7 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
      *
      * @param mixed $date date to convert
      * @param string $format format to map for
+     * @param string $language
      * @param int $respectlocale Use Locale Setting
      * @param string $length short,medium,long,full. Example for September: short=09,medium=Sep,long=September,full=September
      * @param string $tz timezone
@@ -76,7 +79,7 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
      * @throws nothing
      *
      */
-    public function render($date, $format, $respectlocale=0, $length='long',$tz='Europe/Berlin') {
+    public function render($date, $format, $language='de', $respectlocale=0, $length='long',$tz='Europe/Berlin') {
 
         if (is_object($date)) {
             $dateTime = $date;
@@ -101,9 +104,10 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
         }
 
         $new = $dateTime->format($format);
-        // TODO: make mapping dynamic for different languages
-        $new = str_replace($this->monthMapping['en'],$this->monthMapping['de'],$new);
-        $new = str_replace($this->dayMapping['en'],$this->dayMapping['de'],$new);
+        if($language !== 'en') {
+            $new = str_replace($this->monthMapping['en'], $this->monthMapping['de'], $new);
+            $new = str_replace($this->dayMapping['en'], $this->dayMapping['de'], $new);
+        }
         return $new;
         //IntlDateFormatter()
     }

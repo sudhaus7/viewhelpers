@@ -33,6 +33,7 @@ class VarchangedViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCond
      */
     protected static function evaluateCondition($arguments = null)
     {
+
         $value = $arguments['value'];
         $context = $arguments['context'];
         if (!isset($GLOBALS['S7VIEWHELPERS_VARCHANGED']))  $GLOBALS['S7VIEWHELPERS_VARCHANGED'] = [];

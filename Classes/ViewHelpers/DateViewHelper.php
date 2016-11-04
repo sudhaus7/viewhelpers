@@ -80,7 +80,6 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
      *
      */
     public function render($date, $format, $language='de', $respectlocale=0, $length='long',$tz='Europe/Berlin') {
-
         if (is_object($date)) {
             $dateTime = $date;
         } else if ($date == 'now') {
@@ -103,7 +102,7 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
             return $this->handleLocale($dateTime,$format,$length,$tz);
         }
 
-        $new = $dateTime->format($format);
+        $new = date($format,$dateTime->getTimestamp());
         if($language !== 'en') {
             $new = str_replace($this->monthMapping['en'], $this->monthMapping['de'], $new);
             $new = str_replace($this->dayMapping['en'], $this->dayMapping['de'], $new);

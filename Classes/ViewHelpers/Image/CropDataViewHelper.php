@@ -12,14 +12,16 @@ class CropDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
     /**
      * Return the first element of an array
      *
-     * @param mixed $data data
-     * @param string $as variable name
      * @return array
      *
      * @throws nothing
      *
      */
-    public function render( $data, $as='elem') {
+    public function render() {
+
+        $data = $this->arguments['data'];
+        $as = $this->arguments['as'];
+        $content = $this->arguments['content'];
 
         $crop = $data->getProperty('crop');
         $elem = [
@@ -34,6 +36,16 @@ class CropDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
             $elem['isCropped'] = true;
         }
 
+        if (!empty($content)) {
+            if ($content['imagewidth'] > 0) {
+                $elem['width'] = $content['imagewidth'];
+            }
+
+            if ($content['imageheight'] > 0) {
+                $elem['height'] = $content['imageheight'];
+            }
+        }
+
 //        return (int)$croppingConfiguration[$dimensionalProperty];
 
         $renderChildrenClosure =  $this->buildRenderChildrenClosure();
@@ -43,5 +55,11 @@ class CropDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
         $templateVariableContainer->remove($as);
         return $output;
 
+    }
+
+    public function initializeArguments() {
+        $this->registerArgument('data', 'mixed', 'Image data', true);
+        $this->registerArgument('as', 'string', 'The Property to read', false, 'elem');
+        $this->registerArgument('content', 'array', 'The Property to read', false);
     }
 }

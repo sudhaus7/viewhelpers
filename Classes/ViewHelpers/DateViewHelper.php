@@ -82,11 +82,11 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
     public function render($date, $format, $language='de', $respectlocale=0, $length='long',$tz='Europe/Berlin') {
         if (is_object($date)) {
             $dateTime = $date;
-        } else if ($date == 'now') {
-            $dateTime = new \DateTime('now');
-        } else {
+        } else if (is_numeric($date)) {
             $dateTime = new \DateTime();
             $dateTime->setTimestamp($date);
+        } else {
+            $dateTime = new \DateTime($date);
         }
         if ($format == 'SOLR' || $format == 'XML') {
             $dateTime->setTimezone(new \DateTimeZone('Europe/London'));

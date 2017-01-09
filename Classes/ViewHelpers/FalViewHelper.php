@@ -56,7 +56,7 @@ class FalViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper 
         }
         if ($return) return $images;
 
-        if (empty($images)) return '';
+        if (empty($images)) return [];
 
         $output = '';
         if ($retidx > -1) {

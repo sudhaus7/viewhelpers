@@ -33,7 +33,8 @@ class MediapropertyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
         } else {
             if (get_class($file) == \TYPO3\CMS\Extbase\Domain\Model\FileReference::class) {
                 try {
-                    $file = new \TYPO3\CMS\Core\Resource\FileReference(['uid_local' => $file->getOriginalResource()->getUid()]);
+                    $file = $file->getOriginalResource();
+                    //$file = new \TYPO3\CMS\Core\Resource\FileReference(['uid_local' => $file->getOriginalResource()->getUid()]);
                 } catch (\Exception $e) {
                     return '';
                 }

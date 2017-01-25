@@ -39,7 +39,10 @@ class MediapropertyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
                 }
             }
             if (get_class($file) == \TYPO3\CMS\Core\Resource\FileReference::class) {
-                $s = $file->getProperty($this->arguments['property']);
+                // sorge dafür, dass in jedem Fall die Metadaten geladen sind
+                $file->getOriginalFile()->_getMetaData();
+                $s = $file->getProperties()[$this->arguments['property']];
+                //$s = $file->getProperty($this->arguments['property']);
               //  $type = $file->getProperty('type');
             }
         }

@@ -16,4 +16,12 @@ if (!is_array($TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['sudhaus
     );
 }
 
+if (!is_array($TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['sudhaus7viewhelpers_cache'])) {
+    $TYPO3_CONF_VARS['SYS']['caching']['cacheConfigurations']['sudhaus7viewhelpers_cache'] = array(
+        'backend' => 'TYPO3\\CMS\\Core\\Cache\\Backend\\Typo3DatabaseBackend',
+        'frontend' => 'TYPO3\\CMS\\Core\\Cache\\Frontend\\VariableFrontend',
+        'groups' => array('pages'),
+        'options' => array('defaultLifetime' => 0),
+    );
+}
 

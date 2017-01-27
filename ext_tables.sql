@@ -25,7 +25,7 @@ CREATE TABLE cf_sudhaus7viewhelpers_metatags_tags (
 
 #
 # Table structure for table cf_sudhaus7viewhelpers_cache
-CREATE TABLE cf_sudhaus7viewhelpers_metatags (
+CREATE TABLE cf_sudhaus7viewhelpers_cache (
     id int(11) unsigned NOT NULL auto_increment,
     identifier varchar(250) DEFAULT '' NOT NULL,
     expires int(11) unsigned DEFAULT '0' NOT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE cf_sudhaus7viewhelpers_metatags (
 #
 # Table structure for table cf_sudhaus7viewhelpers_cache_tags
 #
-CREATE TABLE cf_sudhaus7viewhelpers_metatags_tags (
+CREATE TABLE cf_sudhaus7viewhelpers_cache_tags (
     id int(11) unsigned NOT NULL auto_increment,
     identifier varchar(250) DEFAULT '' NOT NULL,
     tag varchar(250) DEFAULT '' NOT NULL,

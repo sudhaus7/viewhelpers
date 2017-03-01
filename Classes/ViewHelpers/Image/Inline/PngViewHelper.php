@@ -6,7 +6,7 @@
  * Time: 14:30
  */
 
-namespace SUDHAUS7\Sudhaus7Viewhelpers\Image\Inline;
+namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers\Image\Inline;
 
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -21,7 +21,9 @@ class PngViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper 
      * @throws nothing
      *
      */
-    public function render( $file , $as='data') {
+    public function render( $file , $as='inlinedata') {
+
+
 
         $origfile = $file;
         if (substr($file,0,4)=='EXT:') {

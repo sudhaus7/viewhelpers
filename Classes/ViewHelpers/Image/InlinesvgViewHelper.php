@@ -27,6 +27,9 @@ class InlinesvgViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewH
         if (substr($file,0,4)=='EXT:') {
             $file = GeneralUtility::getFileAbsFileName($file);
         }
+        if (substr($file,0,10) == "/fileadmin" || substr($file,0,8) == "/uploads") {
+            $file = PATH_site.$file;
+        }
         $elem = null;
         if (is_file($file)) {
             $elem = file_get_contents($file);

@@ -11,7 +11,7 @@ namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers\Collection;
 
 class GetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
     /**
-     * Return the first element of an array
+     * Return the key-th element of an array
      *
      * @param mixed $data data
      * @param string $key key name

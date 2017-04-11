@@ -17,7 +17,7 @@ class PagesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelpe
     /**
      * gets the pages with pid as parent page and writes them in subarrays (columns defines the number of subarrays)
      * every subarray contains an equal number of pages if it's possible
-     * e.q. 10 pages, 4 columns => column 0: 3 pages, column 1: 3 pages, column 2: 2 pages, column 3: 2 pages
+     * e.g. 10 pages, 4 columns => column 0: 3 pages, column 1: 3 pages, column 2: 2 pages, column 3: 2 pages
      *
      * @param int $pid
      * @param int $columns

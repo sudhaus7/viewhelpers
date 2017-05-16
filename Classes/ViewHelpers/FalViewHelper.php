@@ -59,6 +59,11 @@ class FalViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper 
             $resstorage = $GLOBALS['TYPO3_DB']->sql_query('select ExtractValue(configuration,\'//field[@index="basePath"]/value\') as base from sys_file_storage where uid='.$rowfile['storage']);
             $rowstorage =  $GLOBALS['TYPO3_DB']->sql_fetch_row($resstorage);
             $ret['identifier'] = str_replace('//','/',$rowstorage[0].$rowfile['identifier']);
+            $ret['extension'] = $rowfile['extension'];
+	        $ret['mime_type'] = $rowfile['mime_type'];
+	        $ret['size'] = $rowfile['size'];
+	        $ret['width'] = $rowfile['width'];
+	        $ret['height'] = $rowfile['height'];
             $origRet = $GLOBALS['TYPO3_DB']->exec_SELECTquery('*','sys_file_metadata','file='.$ret['uid_local']);
             $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($origRet);
             foreach ($row as $k=>$v) {

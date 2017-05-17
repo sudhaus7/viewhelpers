@@ -65,21 +65,32 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
         );
     }
 
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('date','mixed','The date to convert', true);
+        $this->registerArgument('format','string','format to map for',true);
+        $this->registerArgument('language','string','language',false,'de');
+        $this->registerArgument('respectlocale','bool','Use locale setting',false,false);
+        $this->registerArgument('length','string','short,medium,long,full. Example for September: short=09,medium=Sep,long=September,full=September',false,'long');
+        $this->registerArgument('tz','string','timezone',false,'Europe/Berlin');
+    }
+
     /**
      * Return an array for creating dummy content
      *
-     * @param mixed $date date to convert
-     * @param string $format format to map for
-     * @param string $language
-     * @param int $respectlocale Use Locale Setting
-     * @param string $length short,medium,long,full. Example for September: short=09,medium=Sep,long=September,full=September
-     * @param string $tz timezone
      * @return string
      *
      * @throws nothing
      *
      */
-    public function render($date, $format, $language='de', $respectlocale=0, $length='long',$tz='Europe/Berlin') {
+    public function render() {
+        $date = $this->arguments['date'];
+        $format = $this->arguments['format'];
+        $language = $this->arguments['language'];
+        $respectlocale = $this->arguments['respectlocale'];
+        $length = $this->arguments['length'];
+        $tz = $this->arguments['tz'];
         if (is_object($date)) {
             $dateTime = $date;
         } else if (is_numeric($date)) {

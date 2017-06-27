@@ -9,6 +9,7 @@
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
 
 use TYPO3\CMS\Core\Database\DatabaseConnection;
+use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
@@ -27,6 +28,7 @@ class FalTranslationFixViewHelper extends AbstractViewHelper {
      */
     public function render($record, $tableName, $relationFieldName, $as)
     {
+        /** @var FileCollector $fileCollector */
         $fileCollector = GeneralUtility::makeInstance(FileCollector::class);
 
         if ( $record instanceof AbstractDomainObject ) {
@@ -40,8 +42,15 @@ class FalTranslationFixViewHelper extends AbstractViewHelper {
         $fileCollector->addFilesFromRelation($tableName, $relationFieldName, $rawRecord);
 
         $result = $fileCollector->getFiles();
+        $mappedResult = [];
+        /** @var \TYPO3\CMS\Core\Resource\FileReference $file */
+        foreach ($result as $file) {
+            $otherFile = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
+            $otherFile->setOriginalResource($file->getOriginalFile());
+            $mappedResult[] = $otherFile;
+        }
 
-        $this->templateVariableContainer->add($as, $result);
+        $this->templateVariableContainer->add($as, $mappedResult);
         $output = $this->renderChildren();
         $this->templateVariableContainer->remove($as);
 

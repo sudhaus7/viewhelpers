@@ -42,6 +42,7 @@ class FalTranslationFixViewHelper extends AbstractViewHelper {
         $fileCollector->addFilesFromRelation($tableName, $relationFieldName, $rawRecord);
 
         $result = $fileCollector->getFiles();
+        /* necessary because webbookviewhelper expects extbase FileReference instead of core FileReference */
         $mappedResult = [];
         /** @var \TYPO3\CMS\Core\Resource\FileReference $file */
         foreach ($result as $file) {

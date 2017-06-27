@@ -54,10 +54,10 @@ class FalTranslationFixViewHelper extends AbstractViewHelper {
         /* necessary because webbookviewhelper expects extbase FileReference instead of core FileReference */
         if ($renderExtbase) {
             $mappedResult = [];
-            /** @var \TYPO3\CMS\Core\Resource\FileReference $file */
+            /** @var \TYPO3\CMS\Core\Resource\File $file */
             foreach ($result as $file) {
                 $otherFile = new \TYPO3\CMS\Extbase\Domain\Model\FileReference();
-                $otherFile->setOriginalResource($file->getOriginalFile());
+                $otherFile->setOriginalResource($file);
                 $mappedResult[] = $otherFile;
             }
             $this->templateVariableContainer->add($as, $mappedResult);

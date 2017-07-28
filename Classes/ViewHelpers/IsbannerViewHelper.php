@@ -53,7 +53,7 @@ class IsbannerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCondit
                 /** @var $image \TYPO3\CMS\Extbase\Domain\Model\FileReference */
                 $w = $image->getOriginalResource()->getProperty('width');
                 $h = $image->getOriginalResource()->getProperty('height');
-	            echo '<!-- '.__LINE__.'   FileReference Crop'.$image->getProperty('crop').' '.$image->getOriginalResource()->getIdentifier().' '.$image->getOriginalResource()->getPublicUrl().' XX -->';
+	            echo '<!-- '.__LINE__.'   FileReference Crop '.$image->getOriginalResource()->getIdentifier().' '.$image->getOriginalResource()->getPublicUrl().' XX -->';
             }
         } else if (is_array($image)) {
             if (isset($image['identifier']) && is_file(PATH_Site.'/fileadmin/'.$image['identifier'])) {

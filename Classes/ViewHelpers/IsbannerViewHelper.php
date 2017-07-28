@@ -73,7 +73,7 @@ class IsbannerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCondit
         } else {
             return false;
         }
-
+	    \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump([$sysfile,$w,$h,$w/$h]);
         if ($w > $h && $w/$h > 1.6) {
             return true;
         }

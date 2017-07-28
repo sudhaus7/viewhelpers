@@ -44,10 +44,12 @@ class IsbannerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCondit
         if (is_object($image)) {
 
             if ($image instanceof  \TYPO3\CMS\Extbase\Domain\Model\File ) {
+	            echo '<!-- '.__LINE__.'   File XX -->';
                 /** @var $image \TYPO3\CMS\Extbase\Domain\Model\File */
                 $w = $image->getOriginalResource()->getProperty('width');
                 $h = $image->getOriginalResource()->getProperty('height');
             } else if ($image instanceof  \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
+	            echo '<!-- '.__LINE__.'   FileReference XX -->';
                 /** @var $image \TYPO3\CMS\Extbase\Domain\Model\FileReference */
                 $w = $image->getOriginalResource()->getProperty('width');
                 $h = $image->getOriginalResource()->getProperty('height');
@@ -59,7 +61,7 @@ class IsbannerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCondit
                 $w = $image['width'];
                 $h = $image['height'];
             } else {
-
+	            echo '<!-- '.__LINE__.'  XX -->';
                 return false;
             }
         } else if (is_file($image)) {
@@ -69,18 +71,18 @@ class IsbannerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCondit
             if (isset($sysfile['identifier']) && is_file(PATH_Site . '/fileadmin/' . $sysfile['identifier'])) {
                 list($w, $h, $type, $attr) = getimagesize(PATH_Site . '/fileadmin/' . $sysfile['identifier']);
             } else {
-
+	            echo '<!-- '.__LINE__.'  XX -->';
                 return false;
             }
         } else {
-
+	        echo '<!-- '.__LINE__.'  XX -->';
             return false;
         }
 	    //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump([$sysfile,$w,$h,$w/$h]);
         if ($w > $h && $w/$h > 1.6) {
             return true;
         }
-
+	    echo '<!-- '.__LINE__.'  XX -->';
         return false;
     }
 }

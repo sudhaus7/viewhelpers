@@ -48,11 +48,29 @@ class IsbannerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCondit
                 /** @var $image \TYPO3\CMS\Extbase\Domain\Model\File */
                 $w = $image->getOriginalResource()->getProperty('width');
                 $h = $image->getOriginalResource()->getProperty('height');
+
+                $crop = $image->getOriginalResource()->getProperty( 'crop');
+                if (!empty($crop)) {
+                	try {
+                		$data = \json_decode( $crop, true);
+		                $w = isset($data['width']) ? $data['width'] : $w;
+		                $h = isset($data['height']) ? $data['height'] : $h;
+	                } catch (\Exception $e){}
+                }
+
             } else if ($image instanceof  \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
 
                 /** @var $image \TYPO3\CMS\Extbase\Domain\Model\FileReference */
                 $w = $image->getOriginalResource()->getProperty('width');
                 $h = $image->getOriginalResource()->getProperty('height');
+	            $crop = $image->getOriginalResource()->getProperty( 'crop');
+	            if (!empty($crop)) {
+		            try {
+			            $data = \json_decode( $crop, true);
+			            $w = isset($data['width']) ? $data['width'] : $w;
+			            $h = isset($data['height']) ? $data['height'] : $h;
+		            } catch (\Exception $e){}
+	            }
 	            echo '<!-- '.__LINE__.'   FileReference Crop -'.$image->getOriginalResource()->getProperty( 'crop').'- '.$image->getOriginalResource()->getIdentifier().' '.$image->getOriginalResource()->getPublicUrl().' XX -->';
             }
         } else if (is_array($image)) {

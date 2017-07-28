@@ -59,6 +59,7 @@ class IsbannerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCondit
                 $w = $image['width'];
                 $h = $image['height'];
             } else {
+	            echo '<!-- '.__LINE__.' XX -->';
                 return false;
             }
         } else if (is_file($image)) {
@@ -68,12 +69,14 @@ class IsbannerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCondit
             if (isset($sysfile['identifier']) && is_file(PATH_Site . '/fileadmin/' . $sysfile['identifier'])) {
                 list($w, $h, $type, $attr) = getimagesize(PATH_Site . '/fileadmin/' . $sysfile['identifier']);
             } else {
+	            echo '<!-- '.__LINE__.' XX -->';
                 return false;
             }
         } else {
+        	echo '<!-- '.__LINE__.' XX -->';
             return false;
         }
-	    \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump([$sysfile,$w,$h,$w/$h]);
+	    //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump([$sysfile,$w,$h,$w/$h]);
         if ($w > $h && $w/$h > 1.6) {
             return true;
         }

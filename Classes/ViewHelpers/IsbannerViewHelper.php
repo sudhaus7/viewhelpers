@@ -82,7 +82,7 @@ class IsbannerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCondit
         if ($w > $h && $w/$h > 1.6) {
             return true;
         }
-	    echo '<!-- '.__LINE__.' '.$w.' '.$h.' XX -->';
+	    echo '<!-- '.__LINE__.' '.$w.' '.$h.' '.($w/$h).' XX -->';
         return false;
     }
 }

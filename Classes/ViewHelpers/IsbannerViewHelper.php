@@ -15,13 +15,15 @@ use SUDHAUS7\Sudhaus7Base\Tools\Globals;
 class IsbannerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper {
 
 
-    /**
-     * Initializes the "role" argument.
-     * Renders <f:then> child if the current logged in FE user belongs to the specified role (aka usergroup)
-     * otherwise renders <f:else> child.
-     *
-     * @return void
-     */
+
+	/**
+	 * Initializes the "role" argument.
+	 * Renders <f:then> child if the current logged in FE user belongs to the specified role (aka usergroup)
+	 * otherwise renders <f:else> child.
+	 *
+	 * @return void
+	 * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
+	 */
     public function initializeArguments()
     {
         $this->registerArgument('image', 'mixed', 'Check this image');
@@ -71,7 +73,6 @@ class IsbannerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCondit
 			            $h = isset($data['height']) ? $data['height'] : $h;
 		            } catch (\Exception $e){}
 	            }
-	            echo '<!-- '.__LINE__.'   FileReference Crop -'.$image->getOriginalResource()->getProperty( 'crop').'- '.$image->getOriginalResource()->getIdentifier().' '.$image->getOriginalResource()->getPublicUrl().' XX -->';
             }
         } else if (is_array($image)) {
             if (isset($image['identifier']) && is_file(PATH_Site.'/fileadmin/'.$image['identifier'])) {
@@ -80,7 +81,7 @@ class IsbannerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCondit
                 $w = $image['width'];
                 $h = $image['height'];
             } else {
-	            echo '<!-- '.__LINE__.'  XX -->';
+
                 return false;
             }
         } else if (is_file($image)) {
@@ -90,18 +91,17 @@ class IsbannerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCondit
             if (isset($sysfile['identifier']) && is_file(PATH_Site . '/fileadmin/' . $sysfile['identifier'])) {
                 list($w, $h, $type, $attr) = getimagesize(PATH_Site . '/fileadmin/' . $sysfile['identifier']);
             } else {
-	            echo '<!-- '.__LINE__.'  XX -->';
+
                 return false;
             }
         } else {
-	        echo '<!-- '.__LINE__.'  XX -->';
+
             return false;
         }
 	    //\TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump([$sysfile,$w,$h,$w/$h]);
         if ($w > $h && $w/$h > 1.6) {
             return true;
         }
-	    echo '<!-- '.__LINE__.' '.$w.' '.$h.' '.($w/$h).' XX -->';
         return false;
     }
 }

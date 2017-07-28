@@ -69,7 +69,7 @@ class IsbannerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCondit
             if (isset($sysfile['identifier']) && is_file(PATH_Site . '/fileadmin/' . $sysfile['identifier'])) {
                 list($w, $h, $type, $attr) = getimagesize(PATH_Site . '/fileadmin/' . $sysfile['identifier']);
             } else {
-	            echo '<!-- '.__LINE__.' '.print_r($sysfile,true).' XX -->';
+	            echo '<!-- '.__LINE__.' '.print_r([$image,$sysfile],true).' XX -->';
                 return false;
             }
         } else {

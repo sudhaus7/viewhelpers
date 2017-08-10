@@ -4,6 +4,8 @@ namespace SUDHAUS7\Sudhaus7Viewhelpers\Hooks;
 
 
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 class RenderPostProcessHook {
     /**
      * @param array $params
@@ -88,6 +90,12 @@ class RenderPostProcessHook {
             $id = $page['uid'];
             unset($getParams['id']);
             $url = $params['baseUrl'] . $GLOBALS['TSFE']->cObj->getTypoLink_URL($id, $getParams);
+            if (substr($url,0,4)!='http') {
+            	$url = $GLOBALS['TSFE']->cObj->typoLink(['parameter' => $id,
+	                                                     'additionalParams' => GeneralUtility::implodeArrayForUrl('', $getParams),
+	                                                     'forceAbsoluteUrl' => 1,
+	                                                     'returnLast' => 'url']);
+            }
             $metaArray['og:url'] = array(
                 'property' => 'og:url',
                 'content' => $url

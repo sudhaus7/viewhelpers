@@ -101,7 +101,6 @@ class RenderPostProcessHook {
                 'content' => $url
             );
 
-
             $newMeta = array();
             foreach ($metaArray as $metaTag) {
                 $tag = "<meta ";

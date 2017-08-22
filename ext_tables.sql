@@ -9,7 +9,7 @@ CREATE TABLE cf_sudhaus7viewhelpers_metatags (
     lifetime int(11) unsigned DEFAULT '0' NOT NULL,
     PRIMARY KEY (id),
     KEY cache_id (identifier)
-) ENGINE=InnoDB;
+);
 
 #
 # Table structure for table cf_sudhaus7viewhelpers_metatags_tags
@@ -21,7 +21,7 @@ CREATE TABLE cf_sudhaus7viewhelpers_metatags_tags (
     PRIMARY KEY (id),
     KEY cache_id (identifier),
     KEY cache_tag (tag)
-) ENGINE=InnoDB;
+) ;
 
 #
 # Table structure for table cf_sudhaus7viewhelpers_cache
@@ -34,7 +34,7 @@ CREATE TABLE cf_sudhaus7viewhelpers_cache (
     lifetime int(11) unsigned DEFAULT '0' NOT NULL,
     PRIMARY KEY (id),
     KEY cache_id (identifier)
-) ENGINE=InnoDB;
+) ;
 
 #
 # Table structure for table cf_sudhaus7viewhelpers_cache_tags
@@ -46,4 +46,4 @@ CREATE TABLE cf_sudhaus7viewhelpers_cache_tags (
     PRIMARY KEY (id),
     KEY cache_id (identifier),
     KEY cache_tag (tag)
-) ENGINE=InnoDB;
+) ;

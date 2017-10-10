@@ -17,14 +17,28 @@ class RenderPostProcessHook {
         if (TYPO3_MODE == "FE") {
             $page = $GLOBALS['TSFE']->page;
 
+            /*
             if ((int)$GLOBALS['TSFE']->config['config']['noPageTitle'] !== 2) {
                 $sitetitle = trim($GLOBALS['TSFE']->tmpl->sitetitle);
                 $pagetitle = trim(strip_tags($GLOBALS['TSFE']->page['title']));
                 if ($sitetitle == $pagetitle && !empty($GLOBALS['TSFE']->page['nav_title'])) $pagetitle = trim(strip_tags($GLOBALS['TSFE']->page['nav_title']));
                 $params['title'] = $pagetitle.' : '.$sitetitle;
             }
+			*/
 
-            $metaArray = array(
+
+	        $sudhaus7_showPageTitle = !isset($GLOBALS['TSFE']->config['config']['sudhaus7_hidePageTitle']) || $GLOBALS['TSFE']->config['config']['sudhaus7_hidePageTitle'] == 0;
+
+	        if ($sudhaus7_showPageTitle) {
+		        $sitetitle = trim($GLOBALS['TSFE']->tmpl->sitetitle);
+		        $pagetitle = trim(strip_tags($GLOBALS['TSFE']->page['title']));
+		        if ($sitetitle == $pagetitle && !empty($GLOBALS['TSFE']->page['nav_title'])) $pagetitle = trim(strip_tags($GLOBALS['TSFE']->page['nav_title']));
+		        $params['title'] = $pagetitle.' : '.$sitetitle;
+	        }
+
+
+
+	        $metaArray = array(
                 'og:title' => array(
                     'property' => 'og:title',
                     'content' => $params['title']

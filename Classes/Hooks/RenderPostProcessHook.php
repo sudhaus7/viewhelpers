@@ -98,7 +98,7 @@ class RenderPostProcessHook {
 	                                                     'forceAbsoluteUrl' => 1,
 	                                                     'returnLast' => 'url']);
             }
-            if (strpos('//',$url,8) !== false) {
+            if (strpos($url,'//',8) !== false) {
                 $url = substr($url,0,-1);
             }
             $metaArray['og:url'] = array(

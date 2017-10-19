@@ -14,6 +14,7 @@ class RenderPostProcessHook {
      * @return void
      */
     public function render(&$params, &$pObj) {
+        $settings = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sudhaus7_viewhelpers']);
         if (TYPO3_MODE == "FE") {
             $page = $GLOBALS['TSFE']->page;
 
@@ -87,26 +88,33 @@ class RenderPostProcessHook {
                     $params = $passArguments['params'];
                 }
             }
-            // set URL here, do not manipulate
-            $getParams = $this->getUrlParams();
-            $id = $page['uid'];
-            unset($getParams['id']);
-            $url = $params['baseUrl'] . $GLOBALS['TSFE']->cObj->getTypoLink_URL($id, $getParams);
-            if (substr($url,0,4)!='http') {
-            	$url = $GLOBALS['TSFE']->cObj->typoLink('',['parameter' => $id,
-	                                                     'additionalParams' => GeneralUtility::implodeArrayForUrl('', $getParams),
-	                                                     'forceAbsoluteUrl' => 1,
-	                                                     'returnLast' => 'url']);
-            }
-            if (strpos($url,'//',8) !== false) {
-                $url = substr($url,0,-1);
-            }
-            $metaArray['og:url'] = array(
-                'property' => 'og:url',
-                'content' => $url
-            );
-
             $newMeta = array();
+            if (!isset($settings['disableCanonical']) || !$settings['disableCanonical']) {
+                // set URL here, do not manipulate
+                $getParams = $this->getUrlParams();
+                $id = $page['uid'];
+                unset($getParams['id']);
+                $url = $params['baseUrl'] . $GLOBALS['TSFE']->cObj->getTypoLink_URL($id, $getParams);
+                if (substr($url,0,4)!='http') {
+                    $url = $GLOBALS['TSFE']->cObj->typoLink('',['parameter' => $id,
+                        'additionalParams' => GeneralUtility::implodeArrayForUrl('', $getParams),
+                        'forceAbsoluteUrl' => 1,
+                        'returnLast' => 'url']);
+                }
+                if (strpos($url,'//',8) !== false) {
+                    $url = substr($url,0,-1);
+                }
+                $metaArray['og:url'] = array(
+                    'property' => 'og:url',
+                    'content' => $url
+                );
+            }
+
+            if (isset($metaArray['og:url']) && isset($metaArray['og:url']['content'])) {
+                $newMeta[] = '<link rel="canonical" href="' . $metaArray['og:url']['content'] . '" />';
+            }
+
+
             foreach ($metaArray as $metaTag) {
                 $tag = "<meta ";
                 while ($content = current($metaTag)) {
@@ -116,7 +124,6 @@ class RenderPostProcessHook {
                 $tag .= " >";
                 $newMeta[] = $tag;
             }
-            $newMeta[] = '<link rel="canonical" href="' . $metaArray['og:url']['content'] . '" />';
             $params['headerData'] = array_merge($params['headerData'], $newMeta);
             if (isset($GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY']) && !empty($GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY'])) {
                 foreach ($GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY'] as $k=>$v) {
@@ -124,9 +131,12 @@ class RenderPostProcessHook {
                 }
             }
 
-            $params['bodyContent'] = str_replace('###CANONICALURL###', urlencode($metaArray['og:url']['content']), $params['bodyContent']);
-            foreach($params['headerData'] as $k=>$v) {
-                $params['headerData'][$k]=   str_replace('###CANONICALURL###', $metaArray['og:url']['content'],$v);
+            if (!isset($settings['disableCanonical']) || !$settings['disableCanonical']) {
+                $params['bodyContent'] = str_replace('###CANONICALURL###', urlencode($metaArray['og:url']['content']),
+                    $params['bodyContent']);
+                foreach ($params['headerData'] as $k => $v) {
+                    $params['headerData'][$k] = str_replace('###CANONICALURL###', $metaArray['og:url']['content'], $v);
+                }
             }
             return;
         }

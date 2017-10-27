@@ -23,6 +23,7 @@ class RenderPostProcessHook {
                 $pagetitle = trim(strip_tags($GLOBALS['TSFE']->page['title']));
                 if ($sitetitle == $pagetitle && !empty($GLOBALS['TSFE']->page['nav_title'])) $pagetitle = trim(strip_tags($GLOBALS['TSFE']->page['nav_title']));
                 $params['title'] = $pagetitle.' : '.$sitetitle;
+                if (empty($sitetitle)) $params['title'] = $pagetitle;
             }
 
             $metaArray = array(

@@ -116,6 +116,10 @@ class RenderPostProcessHook {
             }
 
 
+            if ($GLOBALS['TSFE']->page['no_search']) {
+	            $newMeta[] = '<META NAME="ROBOTS" CONTENT="NOINDEX,FOLLOW">';
+            }
+
             foreach ($metaArray as $metaTag) {
                 $tag = "<meta ";
                 while ($content = current($metaTag)) {

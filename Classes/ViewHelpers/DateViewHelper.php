@@ -114,7 +114,7 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
             return $this->handleLocale($dateTime,$format,$length,$tz);
         }
 
-        $new = date($format,$dateTime->getTimestamp());
+        $new = $dateTime->format($format);
         if($language !== 'en') {
             $new = str_replace($this->monthMapping['en'], $this->monthMapping['de'], $new);
             $new = str_replace($this->dayMapping['en'], $this->dayMapping['de'], $new);

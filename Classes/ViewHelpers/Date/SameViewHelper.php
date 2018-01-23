@@ -19,8 +19,8 @@ class SameViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionV
      */
     public function initializeArguments()
     {
-        $this->registerArgument('date1', 'string', 'Timestamp of the first date');
-        $this->registerArgument('date2', 'string', 'Timestamp of the second date');
+        $this->registerArgument('date1', 'mixed', 'Timestamp or DateTime Object of the first date');
+        $this->registerArgument('date2', 'mixed', 'Timestamp of DateTime Object the second date');
         $this->registerArgument('format', 'string', 'The format to compare');
     }
 
@@ -37,8 +37,6 @@ class SameViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionV
         $date1 = $arguments['date1'];
         $date2 = $arguments['date2'];
         $format = $arguments['format'];
-
-
 
         if (is_object($date1)) {
             $d1 = $date1->format($format);

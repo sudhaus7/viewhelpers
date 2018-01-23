@@ -95,13 +95,25 @@ class RenderPostProcessHook {
                 $getParams = $this->getUrlParams();
                 $id = $page['uid'];
                 unset($getParams['id']);
-                $url = $params['baseUrl'] . $GLOBALS['TSFE']->cObj->getTypoLink_URL($id, $getParams);
-                if (substr($url,0,4)!='http') {
-                    $url = $GLOBALS['TSFE']->cObj->typoLink('',['parameter' => $id,
-                        'additionalParams' => GeneralUtility::implodeArrayForUrl('', $getParams),
-                        'forceAbsoluteUrl' => 1,
-                        'returnLast' => 'url']);
-                }
+
+                /*
+                 * Problem: getTypoLink_URL can return an absolute url if configured properly
+                 */
+                /*
+                $url = $GLOBALS['TSFE']->cObj->getTypoLink_URL($id, $getParams);
+	            if (substr($url,0,4)!='http') $url = $params['baseUrl'] . $url;
+                */
+                // preferred method
+	            //if (substr($url,0,4)!='http') {
+		            $url = $GLOBALS['TSFE']->cObj->typoLink('',['parameter' => $id,
+		                                                        'additionalParams' => GeneralUtility::implodeArrayForUrl('', $getParams),
+		                                                        'forceAbsoluteUrl' => 1,
+		                                                        'returnLast' => 'url']);
+	            //}
+
+
+
+
                 if (strpos($url,'//',8) !== false) {
                     $url = substr($url,0,-1);
                 }

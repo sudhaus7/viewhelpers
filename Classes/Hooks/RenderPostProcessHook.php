@@ -56,14 +56,15 @@ class RenderPostProcessHook {
                 ON sys_file.uid=sys_file_reference.uid_local
                 JOIN tt_content
                 ON tt_content.uid=sys_file_reference.uid_foreign
-                AND tt_content.CType="textmedia"
+                AND tt_content.CType in ("textmedia" ,"image")
                 AND tt_content.pid="%1$d"
                 AND tt_content.hidden=0
                 AND tt_content.deleted=0
                 WHERE sys_file_reference.tablenames="tt_content"
-                AND sys_file_reference.fieldname="media"
+                AND sys_file_reference.fieldname in ("media", "assets" ,"image")
                 AND sys_file_reference.hidden=0
                 AND sys_file_reference.deleted=0
+                AND sys_file.type=2
                 GROUP BY sys_file.identifier
                 LIMIT 3
             ';

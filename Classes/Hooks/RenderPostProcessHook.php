@@ -5,6 +5,7 @@ namespace SUDHAUS7\Sudhaus7Viewhelpers\Hooks;
 
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 
 class RenderPostProcessHook {
     /**
@@ -118,6 +119,13 @@ class RenderPostProcessHook {
                 if (strpos($url,'//',8) !== false) {
                     $url = substr($url,0,-1);
                 }
+	            /** @var Dispatcher $signalSlotDispatcher */
+	            $signalSlotDispatcher = GeneralUtility::makeInstance( Dispatcher::class);
+	            try {
+		            list( $url ) = $signalSlotDispatcher->dispatch( __CLASS__, 'generateCannonical', [ $url ] );
+	            } catch(\Exception $e) {
+
+	            }
                 $metaArray['og:url'] = array(
                     'property' => 'og:url',
                     'content' => $url

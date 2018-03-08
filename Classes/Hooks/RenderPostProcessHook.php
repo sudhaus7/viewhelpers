@@ -107,10 +107,10 @@ class RenderPostProcessHook {
                 */
                 // preferred method
 	            //if (substr($url,0,4)!='http') {
-		            $url = $GLOBALS['TSFE']->cObj->typoLink('',['parameter' => $id,
-		                                                        'additionalParams' => GeneralUtility::implodeArrayForUrl('', $getParams),
-		                                                        'forceAbsoluteUrl' => 1,
-		                                                        'returnLast' => 'url']);
+	            $url = $GLOBALS['TSFE']->cObj->typoLink('',['parameter' => $id,
+	                                                        'additionalParams' => GeneralUtility::implodeArrayForUrl('', $getParams),
+	                                                        'forceAbsoluteUrl' => 1,
+	                                                        'returnLast' => 'url']);
 	            //}
 
 

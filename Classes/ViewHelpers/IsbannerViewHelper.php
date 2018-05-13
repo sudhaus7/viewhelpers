@@ -8,10 +8,6 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
 
-
-
-use SUDHAUS7\Sudhaus7Base\Tools\Globals;
-
 class IsbannerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper {
 
 
@@ -87,7 +83,7 @@ class IsbannerViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCondit
         } else if (is_file($image)) {
             list($w,$h,$type,$attr) = getimagesize($image);
         } else if (is_integer($image)) {
-            $sysfile = Globals::db()->exec_SELECTgetSingleRow('*', 'sys_file', 'uid=' . (int)$image);
+            $sysfile = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('*', 'sys_file', 'uid=' . (int)$image);
             if (isset($sysfile['identifier']) && is_file(PATH_Site . '/fileadmin/' . $sysfile['identifier'])) {
                 list($w, $h, $type, $attr) = getimagesize(PATH_Site . '/fileadmin/' . $sysfile['identifier']);
             } else {

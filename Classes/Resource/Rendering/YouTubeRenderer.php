@@ -39,7 +39,7 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
         $youtube = parent::render($file, $width, $height, $options, $usedPathsRelativeToCurrentScript);
 
 
-        if (!empty($file->getProperty('tx_sudhaus7viewhelpers_posterimage'))) {
+        if ($file->hasProperty( 'tx_sudhaus7viewhelpers_posterimage') && !empty($file->getProperty('tx_sudhaus7viewhelpers_posterimage'))) {
             $poster = $this->renderImage($file, $width, $height);
         } else {
             if ($file instanceof FileReference) {

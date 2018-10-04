@@ -60,7 +60,7 @@ class VideoTagRenderer implements FileRendererInterface
         array $options = [],
         $usedPathsRelativeToCurrentScript = false
     ) {
-        if (!empty($file->getProperty('tx_sudhaus7viewhelpers_posterimage'))) {
+        if ($file->hasProperty( 'tx_sudhaus7viewhelpers_posterimage') &&  !empty($file->getProperty('tx_sudhaus7viewhelpers_posterimage'))) {
             $poster = $this->renderImage($file, $width, $height);
             $uid = $file->getProperty('uid_foreign');
             if (!empty($poster)) {

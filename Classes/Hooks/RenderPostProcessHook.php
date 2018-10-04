@@ -2,19 +2,19 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\Hooks;
 
-
-
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 
-class RenderPostProcessHook {
+class RenderPostProcessHook
+{
     /**
      * @param array $params
      * @param object $pObj
      *
      * @return void
      */
-    public function render(&$params, &$pObj) {
+    public function render(&$params, &$pObj)
+    {
         $settings = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sudhaus7_viewhelpers']);
         if (TYPO3_MODE == "FE") {
             $page = $GLOBALS['TSFE']->page;
@@ -22,9 +22,13 @@ class RenderPostProcessHook {
             if ((int)$GLOBALS['TSFE']->config['config']['noPageTitle'] !== 2) {
                 $sitetitle = trim($GLOBALS['TSFE']->tmpl->sitetitle);
                 $pagetitle = trim(strip_tags($GLOBALS['TSFE']->page['title']));
-                if ($sitetitle == $pagetitle && !empty($GLOBALS['TSFE']->page['nav_title'])) $pagetitle = trim(strip_tags($GLOBALS['TSFE']->page['nav_title']));
+                if ($sitetitle == $pagetitle && !empty($GLOBALS['TSFE']->page['nav_title'])) {
+                    $pagetitle = trim(strip_tags($GLOBALS['TSFE']->page['nav_title']));
+                }
                 $params['title'] = $pagetitle.' : '.$sitetitle;
-                if (empty($sitetitle)) $params['title'] = $pagetitle;
+                if (empty($sitetitle)) {
+                    $params['title'] = $pagetitle;
+                }
             }
 
             $metaArray = array(
@@ -103,29 +107,28 @@ class RenderPostProcessHook {
                  */
                 /*
                 $url = $GLOBALS['TSFE']->cObj->getTypoLink_URL($id, $getParams);
-	            if (substr($url,0,4)!='http') $url = $params['baseUrl'] . $url;
+                if (substr($url,0,4)!='http') $url = $params['baseUrl'] . $url;
                 */
                 // preferred method
-	            //if (substr($url,0,4)!='http') {
-	            $url = $GLOBALS['TSFE']->cObj->typoLink('',['parameter' => $id,
-	                                                        'additionalParams' => GeneralUtility::implodeArrayForUrl('', $getParams),
-	                                                        'forceAbsoluteUrl' => 1,
-	                                                        'returnLast' => 'url']);
-	            //}
+                //if (substr($url,0,4)!='http') {
+                $url = $GLOBALS['TSFE']->cObj->typoLink('', ['parameter' => $id,
+                                                            'additionalParams' => GeneralUtility::implodeArrayForUrl('', $getParams),
+                                                            'forceAbsoluteUrl' => 1,
+                                                            'returnLast' => 'url']);
+                //}
 
 
 
 
-                if (strpos($url,'//',8) !== false) {
-                    $url = substr($url,0,-1);
+                if (strpos($url, '//', 8) !== false) {
+                    $url = substr($url, 0, -1);
                 }
-	            /** @var Dispatcher $signalSlotDispatcher */
-	            $signalSlotDispatcher = GeneralUtility::makeInstance( Dispatcher::class);
-	            try {
-		            list( $url ) = $signalSlotDispatcher->dispatch( __CLASS__, 'generateCannonical', [ $url ] );
-	            } catch(\Exception $e) {
-
-	            }
+                /** @var Dispatcher $signalSlotDispatcher */
+                $signalSlotDispatcher = GeneralUtility::makeInstance(Dispatcher::class);
+                try {
+                    list($url) = $signalSlotDispatcher->dispatch(__CLASS__, 'generateCannonical', [ $url ]);
+                } catch (\Exception $e) {
+                }
                 $metaArray['og:url'] = array(
                     'property' => 'og:url',
                     'content' => $url
@@ -138,7 +141,7 @@ class RenderPostProcessHook {
 
 
             if ($GLOBALS['TSFE']->page['no_search']) {
-	            $newMeta[] = '<META NAME="ROBOTS" CONTENT="NOINDEX,FOLLOW">';
+                $newMeta[] = '<META NAME="ROBOTS" CONTENT="NOINDEX,FOLLOW">';
             }
 
             foreach ($metaArray as $metaTag) {
@@ -153,13 +156,18 @@ class RenderPostProcessHook {
             $params['headerData'] = array_merge($params['headerData'], $newMeta);
             if (isset($GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY']) && !empty($GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY'])) {
                 foreach ($GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY'] as $k=>$v) {
-                    if (isset($params[$k]) && !empty($v)) $params[$k] .= $v;
+                    if (isset($params[$k]) && !empty($v)) {
+                        $params[$k] .= $v;
+                    }
                 }
             }
 
             if (!isset($settings['disableCanonical']) || !$settings['disableCanonical']) {
-                $params['bodyContent'] = str_replace('###CANONICALURL###', urlencode($metaArray['og:url']['content']),
-                    $params['bodyContent']);
+                $params['bodyContent'] = str_replace(
+                    '###CANONICALURL###',
+                    urlencode($metaArray['og:url']['content']),
+                    $params['bodyContent']
+                );
                 foreach ($params['headerData'] as $k => $v) {
                     $params['headerData'][$k] = str_replace('###CANONICALURL###', $metaArray['og:url']['content'], $v);
                 }
@@ -168,7 +176,8 @@ class RenderPostProcessHook {
         }
     }
 
-    private function getUrlParams() {
+    private function getUrlParams()
+    {
         $getParams = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET();
         return $getParams;
     }

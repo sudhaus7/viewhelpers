@@ -1,6 +1,8 @@
 <?php
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
-class DummyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+
+class DummyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
     /**
      * Return an array for creating dummy content
      *
@@ -11,7 +13,8 @@ class DummyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelpe
      * @throws nothing
      *
      */
-    public function render($actual, $must) {
+    public function render($actual, $must)
+    {
         $array = array();
         for ($i=$actual+1; $i < $must; $i++) {
             $array[] = $i;

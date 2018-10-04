@@ -8,8 +8,8 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
 
-
-class InarrayViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper {
+class InarrayViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper
+{
     /**
      * Initializes the "role" argument.
      * Renders <f:then> child if the current logged in FE user belongs to the specified role (aka usergroup)
@@ -21,7 +21,6 @@ class InarrayViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditi
     {
         $this->registerArgument('haystack', 'array', 'The array to check');
         $this->registerArgument('needle', 'mixed', 'The value to check');
-
     }
 
 
@@ -34,7 +33,9 @@ class InarrayViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditi
      */
     protected static function evaluateCondition($arguments = null)
     {
-        if (!is_array($arguments['haystack'])) return false;
+        if (!is_array($arguments['haystack'])) {
+            return false;
+        }
         return in_array($arguments['needle'], $arguments['haystack']);
     }
 }

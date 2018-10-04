@@ -8,8 +8,8 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
 
-
-class VarchangedViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper {
+class VarchangedViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper
+{
     /**
      * Initializes the "role" argument.
      * Renders <f:then> child if the current logged in FE user belongs to the specified role (aka usergroup)
@@ -33,10 +33,11 @@ class VarchangedViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCond
      */
     protected static function evaluateCondition($arguments = null)
     {
-
         $value = $arguments['value'];
         $context = $arguments['context'];
-        if (!isset($GLOBALS['S7VIEWHELPERS_VARCHANGED']))  $GLOBALS['S7VIEWHELPERS_VARCHANGED'] = [];
+        if (!isset($GLOBALS['S7VIEWHELPERS_VARCHANGED'])) {
+            $GLOBALS['S7VIEWHELPERS_VARCHANGED'] = [];
+        }
         if (!isset($GLOBALS['S7VIEWHELPERS_VARCHANGED'][$context])) {
             $GLOBALS['S7VIEWHELPERS_VARCHANGED'][$context] = $value;
             return true;

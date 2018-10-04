@@ -8,8 +8,8 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers\Collection;
 
-
-class GetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class GetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
     /**
      * Return the key-th element of an array
      *
@@ -21,15 +21,24 @@ class GetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper 
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException
      */
-    public function render( $data, $key, $as='value',$direct=false) {
-        if (is_object($data) && !method_exists($data,'toArray')) {
+    public function render($data, $key, $as='value', $direct=false)
+    {
+        if (is_object($data) && !method_exists($data, 'toArray')) {
             throw new \TYPO3\CMS\Fluid\Core\ViewHelper\Exception('GetViewHelper only supports arrays and objects implementing a toArray Method', 1248728393);
         }
-        if (is_object($data)) $data = $data->toArray();
+        if (is_object($data)) {
+            $data = $data->toArray();
+        }
         //$elem = array_shift($data);
-        if (empty($data)) return '';
-        if (!isset($data[$key])) return null;
-        if ($direct) return $data[$key];
+        if (empty($data)) {
+            return '';
+        }
+        if (!isset($data[$key])) {
+            return null;
+        }
+        if ($direct) {
+            return $data[$key];
+        }
         $output = '';
         if ($value = $data[$key]) {
             $renderChildrenClosure = $this->buildRenderChildrenClosure();
@@ -39,8 +48,5 @@ class GetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper 
             $templateVariableContainer->remove($as);
         }
         return $output;
-
     }
-
-
 }

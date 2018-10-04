@@ -8,11 +8,10 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\Backend\Displayconds;
 
-
-class Conditions {
-
-	public function showPosterimageField() {
-		return true;
-	}
-
+class Conditions
+{
+    public function showPosterimageField()
+    {
+        return true;
+    }
 }

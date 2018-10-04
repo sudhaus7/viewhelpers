@@ -8,7 +8,8 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers\Image;
 
-class CropDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class CropDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
     /**
      * Return the first element of an array
      *
@@ -17,8 +18,8 @@ class CropDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
      * @throws nothing
      *
      */
-    public function render() {
-
+    public function render()
+    {
         $data = $this->arguments['data'];
         $as = $this->arguments['as'];
         $content = $this->arguments['content'];
@@ -50,14 +51,14 @@ class CropDataViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHe
 
         $renderChildrenClosure =  $this->buildRenderChildrenClosure();
         $templateVariableContainer = $this->renderingContext->getTemplateVariableContainer();
-        $templateVariableContainer->add($as,$elem);
+        $templateVariableContainer->add($as, $elem);
         $output = $renderChildrenClosure();
         $templateVariableContainer->remove($as);
         return $output;
-
     }
 
-    public function initializeArguments() {
+    public function initializeArguments()
+    {
         $this->registerArgument('data', 'mixed', 'Image data', true);
         $this->registerArgument('as', 'string', 'The Property to read', false, 'elem');
         $this->registerArgument('content', 'array', 'The Property to read', false);

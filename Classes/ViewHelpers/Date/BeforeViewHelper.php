@@ -8,8 +8,8 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers\Date;
 
-
-class BeforeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper {
+class BeforeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper
+{
     /**
      * Initializes the "role" argument.
      * Renders <f:then> child if the current logged in FE user belongs to the specified role (aka usergroup)

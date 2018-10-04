@@ -8,19 +8,21 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers\Register;
 
-
-class GetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
-    public function initializeArguments() {
-        $this->registerArgument('key', 'string', 'The Key to read', TRUE);
+class GetViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
+    public function initializeArguments()
+    {
+        $this->registerArgument('key', 'string', 'The Key to read', true);
     }
     /**
      * Return a typolink-rendered link
      * @throws nothing
      */
-    public function render() {
-
-
-        if (isset($GLOBALS["TSFE"]->register[$this->arguments['key']])) return($GLOBALS["TSFE"]->register[$this->arguments['key']]);
+    public function render()
+    {
+        if (isset($GLOBALS["TSFE"]->register[$this->arguments['key']])) {
+            return($GLOBALS["TSFE"]->register[$this->arguments['key']]);
+        }
 
         return false;
     }

@@ -1,15 +1,18 @@
 <?php
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
+
 use TYPO3\CMS\Core\Database\DatabaseConnection;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
-class PagesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class PagesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
     /**
      * @var DatabaseConnection
      */
     protected $db;
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = $GLOBALS['TYPO3_DB'];
     }
 
@@ -26,12 +29,12 @@ class PagesViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelpe
      * @throws nothing
      *
      */
-    public function render($pid, $columns) {
-
-        $ret = $this->db->exec_SELECTquery('*','pages','pid=' . $pid . ' AND hidden=0 AND deleted=0');
+    public function render($pid, $columns)
+    {
+        $ret = $this->db->exec_SELECTquery('*', 'pages', 'pid=' . $pid . ' AND hidden=0 AND deleted=0');
         $pages_temp = [];
         $pages = [];
-        while($res = $this->db->sql_fetch_assoc($ret)) {
+        while ($res = $this->db->sql_fetch_assoc($ret)) {
             $pages_temp[$res['uid']] = $res;
             $count = $this->db->exec_SELECTcountRows('title', 'pages', 'pid=' . $res['uid'] . ' AND hidden=0 AND deleted=0');
             $pages_temp[$res['uid']]['subpages'] = $count;

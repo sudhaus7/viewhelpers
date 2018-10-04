@@ -8,8 +8,8 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers\Image;
 
-
-class IssvgViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper {
+class IssvgViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper
+{
     /**
      * Initializes the "role" argument.
      * Renders <f:then> child if the current logged in FE user belongs to the specified role (aka usergroup)
@@ -20,7 +20,6 @@ class IssvgViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCondition
     public function initializeArguments()
     {
         $this->registerArgument('file', 'mixed', 'The File to check');
-
     }
 
 
@@ -36,19 +35,17 @@ class IssvgViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractCondition
         $file = $arguments['file'];
         if (is_object($file)) {
             if ($file instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
-
                 $ext = $file->getOriginalResource()->getExtension();
-                if ($ext == 'svg' || $ext == 'SVG') return true;
-
-
+                if ($ext == 'svg' || $ext == 'SVG') {
+                    return true;
+                }
             }
-
-        } else if (is_integer($file)) {
-
-        } else if (is_string($file)) {
-            if (strtolower(substr($file,-4,4))=='.svg') return true;
+        } elseif (is_integer($file)) {
+        } elseif (is_string($file)) {
+            if (strtolower(substr($file, -4, 4))=='.svg') {
+                return true;
+            }
         }
         return false;
-
     }
 }

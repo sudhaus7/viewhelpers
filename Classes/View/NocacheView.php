@@ -1,5 +1,6 @@
 <?php
 namespace SUDHAUS7\Sudhaus7Viewhelpers\View;
+
 /*
  * This file is part of the FluidTYPO3/Vhs project under GPLv2 or later.
  *
@@ -12,6 +13,7 @@ use TYPO3\CMS\Fluid\Compatibility\TemplateParserBuilder;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
 use TYPO3\CMS\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3\CMS\Fluid\View\TemplateView;
+
 /**
  * Uncache Template View
  *
@@ -19,7 +21,8 @@ use TYPO3\CMS\Fluid\View\TemplateView;
  * @package Vhs
  * @subpackage View
  */
-class NocacheView extends TemplateView {
+class NocacheView extends TemplateView
+{
 
     /**
      * @param string $postUserFunc
@@ -27,28 +30,29 @@ class NocacheView extends TemplateView {
      * @param string $content
      * @return string
      */
-    public function callUserFunction($postUserFunc, $conf, $content) {
-/*
-        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TSFE']->tmpl);exit;
-        $this->templateRootPaths = [
-            'EXT:bfactor_bkv4/Resources/Private/Templates'
-        ];
-        $this->layoutRootPaths = [
-            'EXT:bfactor_bkv4/Resources/Private/Layouts'
-        ];
-        $this->partialRootPaths = [
-            'EXT:bfactor_bkv4/Resources/Private/Partials'
-        ];
-*/
+    public function callUserFunction($postUserFunc, $conf, $content)
+    {
+        /*
+                \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump($GLOBALS['TSFE']->tmpl);exit;
+                $this->templateRootPaths = [
+                    'EXT:bfactor_bkv4/Resources/Private/Templates'
+                ];
+                $this->layoutRootPaths = [
+                    'EXT:bfactor_bkv4/Resources/Private/Layouts'
+                ];
+                $this->partialRootPaths = [
+                    'EXT:bfactor_bkv4/Resources/Private/Partials'
+                ];
+        */
 
 
 
         $partial = $conf['partial'];
         $section = $conf['section'];
-        $arguments = TRUE === is_array($conf['arguments']) ? $conf['arguments'] : array();
+        $arguments = true === is_array($conf['arguments']) ? $conf['arguments'] : array();
         /** @var \TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext $controllerContext */
         $controllerContext = $conf['controllerContext'];
-        if (TRUE === empty($partial)) {
+        if (true === empty($partial)) {
             return '';
         }
         /** @var RenderingContext $renderingContext */
@@ -58,18 +62,16 @@ class NocacheView extends TemplateView {
             return $this->renderPartialUncached($renderingContext, $partial, $section, $arguments);
         } catch (\BadFunctionCallException $e) {
             if ($e->getCode() == 1365429656) {
-
                 $this->templateRootPaths =  $GLOBALS['TSFE']->tmpl->setup['page.']['10.']['templateRootPaths.'];
                 $this->layoutRootPaths =  $GLOBALS['TSFE']->tmpl->setup['page.']['10.']['layoutRootPaths.'];
                 $this->partialRootPaths = $GLOBALS['TSFE']->tmpl->setup['page.']['10.']['partialRootPaths.'];
                 return $this->renderPartialUncached($renderingContext, $partial, $section, $arguments);
             } else {
-                throw new \BadFunctionCallException($e->getMessage(),$e->getCode());
-
+                throw new \BadFunctionCallException($e->getMessage(), $e->getCode());
             }
         } catch (\Exception $e) {
             $cls = get_class($e);
-            throw new $cls($e->getMessage(),$e->getCode());
+            throw new $cls($e->getMessage(), $e->getCode());
         }
     }
     /**
@@ -77,7 +79,8 @@ class NocacheView extends TemplateView {
      * @param \TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext $controllerContext
      * @return void
      */
-    protected function prepareContextsForUncachedRendering(RenderingContextInterface $renderingContext, ControllerContext $controllerContext) {
+    protected function prepareContextsForUncachedRendering(RenderingContextInterface $renderingContext, ControllerContext $controllerContext)
+    {
         $renderingContext->setControllerContext($controllerContext);
         $this->setRenderingContext($renderingContext);
         $this->templateParser = TemplateParserBuilder::build();
@@ -92,8 +95,9 @@ class NocacheView extends TemplateView {
      * @param array $arguments
      * @return string
      */
-    protected function renderPartialUncached(RenderingContextInterface $renderingContext, $partial, $section = NULL, $arguments = array()) {
-        array_push($this->renderingStack, array('type' => self::RENDERING_TEMPLATE, 'parsedTemplate' => NULL, 'renderingContext' => $renderingContext));
+    protected function renderPartialUncached(RenderingContextInterface $renderingContext, $partial, $section = null, $arguments = array())
+    {
+        array_push($this->renderingStack, array('type' => self::RENDERING_TEMPLATE, 'parsedTemplate' => null, 'renderingContext' => $renderingContext));
         $rendered = $this->renderPartial($partial, $section, $arguments);
         array_pop($this->renderingStack);
         return $rendered;

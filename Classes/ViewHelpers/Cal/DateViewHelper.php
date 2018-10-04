@@ -10,7 +10,8 @@ namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers\Cal;
 
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
-class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
     /**
      * @var array
      */
@@ -20,7 +21,8 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
      */
     protected $dayMapping;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->monthMapping = array(
             'en' => array(
                 'January',
@@ -74,14 +76,15 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
     }
     public function initializeArguments()
     {
-        $this->registerArgument('day','int','The day to convert',false,date('j'));
-        $this->registerArgument('month','int','The month to convert',false,date('n'));
-        $this->registerArgument('year','int','The year to convert',false,date('Y'));
-        $this->registerArgument('format','string','The date() format',true);
-        $this->registerArgument('language','string','language',false,'de');
+        $this->registerArgument('day', 'int', 'The day to convert', false, date('j'));
+        $this->registerArgument('month', 'int', 'The month to convert', false, date('n'));
+        $this->registerArgument('year', 'int', 'The year to convert', false, date('Y'));
+        $this->registerArgument('format', 'string', 'The date() format', true);
+        $this->registerArgument('language', 'string', 'language', false, 'de');
     }
 
-    public function render() {
+    public function render()
+    {
         $year = date('Y');
         $month = date('n');
         $day = date('j');
@@ -90,14 +93,14 @@ class DateViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
         foreach ($this->arguments as $key => $value) {
             $$key = $value;
         }
-        $date = \DateTime::createFromFormat('Y-n-j',$year.'-'.$month.'-'.$day);
+        $date = \DateTime::createFromFormat('Y-n-j', $year.'-'.$month.'-'.$day);
         $newFormat = $date->format($format);
         if ($language != 'en') {
-            if (array_key_exists($language,$this->dayMapping)) {
-                $newFormat = str_replace($this->dayMapping['en'],$this->dayMapping[$language],$newFormat);
+            if (array_key_exists($language, $this->dayMapping)) {
+                $newFormat = str_replace($this->dayMapping['en'], $this->dayMapping[$language], $newFormat);
             }
-            if (array_key_exists($language,$this->monthMapping)) {
-                $newFormat = str_replace($this->monthMapping['en'],$this->monthMapping[$language],$newFormat);
+            if (array_key_exists($language, $this->monthMapping)) {
+                $newFormat = str_replace($this->monthMapping['en'], $this->monthMapping[$language], $newFormat);
             }
         }
         return $newFormat;

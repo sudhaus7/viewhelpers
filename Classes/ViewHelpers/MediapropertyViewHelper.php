@@ -8,9 +8,6 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
 
-
-
-
 class MediapropertyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
     public function initializeArguments()
@@ -47,10 +44,14 @@ class MediapropertyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
               //  $type = $file->getProperty('type');
             }
         }
-    //    if ($type=='3') return '';
+        //    if ($type=='3') return '';
         if (!empty($s)) {
-            if (!empty($this->arguments['prepend'])) $s = $this->arguments['prepend'] . $s;
-            if (!empty($this->arguments['append'])) $s = $s . $this->arguments['append'];
+            if (!empty($this->arguments['prepend'])) {
+                $s = $this->arguments['prepend'] . $s;
+            }
+            if (!empty($this->arguments['append'])) {
+                $s = $s . $this->arguments['append'];
+            }
         }
         return $s;
     }

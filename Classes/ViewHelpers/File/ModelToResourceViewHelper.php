@@ -8,7 +8,6 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers\File;
 
-
 class ModelToResourceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
     /**
@@ -18,19 +17,17 @@ class ModelToResourceViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstrac
      * @return string
      *
      */
-    public function render( $file, $as='elem') {
+    public function render($file, $as='elem')
+    {
         $elem = $file;
         if (get_class($file)==\TYPO3\CMS\Extbase\Domain\Model\FileReference::class) {
             $elem = new \TYPO3\CMS\Core\Resource\FileReference(['uid_local'=>$file->getUid()]);
         }
         $renderChildrenClosure =  $this->buildRenderChildrenClosure();
         $templateVariableContainer = $this->renderingContext->getTemplateVariableContainer();
-        $templateVariableContainer->add($as,$elem);
+        $templateVariableContainer->add($as, $elem);
         $output = $renderChildrenClosure();
         $templateVariableContainer->remove($as);
         return $output;
-
     }
-
-
 }

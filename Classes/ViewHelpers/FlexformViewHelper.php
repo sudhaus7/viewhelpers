@@ -8,16 +8,13 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
 
-
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class FlexformViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
-
-
     public function initializeArguments()
     {
-        $this->registerArgument('xml', 'string', 'The Flexformdata to parse', TRUE);
+        $this->registerArgument('xml', 'string', 'The Flexformdata to parse', true);
         $this->registerArgument('field', 'string', 'fieldname', true);
         $this->registerArgument('sheet', 'string', 'sheet key', false, 'sDEF');
         $this->registerArgument('language', 'string', 'language key', false, 'lDEF');

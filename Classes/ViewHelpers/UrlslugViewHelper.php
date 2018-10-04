@@ -8,8 +8,8 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
 
-
-class UrlslugViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class UrlslugViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
 
     /**
@@ -23,11 +23,13 @@ class UrlslugViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
      * @throws nothing
      *
      */
-    public function render($label) {
+    public function render($label)
+    {
         return $this->generateslug($label);
     }
 
-    private function generateslug($str) {
+    private function generateslug($str)
+    {
         $str = strtolower(trim($str));
 
         $str = preg_replace('~[^\\pL\d]+~u', '-', $str);
@@ -43,11 +45,12 @@ class UrlslugViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
                 'ae',
                 'ue',
                 'oe',
-            )
-            , $str);
+            ),
+            $str
+        );
         // Trim incl. dashes
         $str = trim($str, '-');
-        if (function_exists('iconv') === TRUE) {
+        if (function_exists('iconv') === true) {
             $str = iconv('utf-8', 'us-ascii//TRANSLIT', $str);
         }
         $str = preg_replace('/[^a-z0-9-]/', '-', $str);

@@ -8,8 +8,8 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
 
-
-class RowcounterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class RowcounterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+{
 
 
     /**
@@ -18,7 +18,8 @@ class RowcounterViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractView
      * @return string
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception\InvalidVariableException
      */
-    public function render($idx,$maxitems) {
+    public function render($idx, $maxitems)
+    {
         return ceil($idx/$maxitems);
     }
 }

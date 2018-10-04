@@ -8,13 +8,12 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\Hooks;
 
+class MetaPostProcessHook
+{
+    public $extcache = null;
 
-class MetaPostProcessHook {
-
-    var $extcache = null;
-
-    public function __construct() {
-
+    public function __construct()
+    {
         $this->extcache = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Cache\\CacheManager')->getCache('sudhaus7viewhelpers_metatags');
     }
 
@@ -24,7 +23,8 @@ class MetaPostProcessHook {
      * @return mixed
      */
 
-    public function attach(&$conf,&$pObj) {
+    public function attach(&$conf, &$pObj)
+    {
 
         // \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump(array($this->extcache,$conf,$pObj,$_GET,$GLOBALS['TSFE']));
         /** @var \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $tsfe */
@@ -40,25 +40,32 @@ class MetaPostProcessHook {
         if (empty($aMeta) && isset($GLOBALS['SUDHAUS7_META_REGISTRY']) && is_array($GLOBALS['SUDHAUS7_META_REGISTRY'])) {
             ksort($GLOBALS['SUDHAUS7_META_REGISTRY']);
             foreach ($GLOBALS['SUDHAUS7_META_REGISTRY'] as $key=>$value) {
-                if (strpos($key,'image')!==false) $value = $conf['params']['baseUrl'].$value;
+                if (strpos($key, 'image')!==false) {
+                    $value = $conf['params']['baseUrl'].$value;
+                }
                 list($prop, $key) = self::checkType($key);
                 $aMeta[$key] = array(
                     $prop => $key,
                     'content' => $value,
                 );
             }
-            if ($this->extcache) $this->extcache->set($cacheKey, $aMeta, array('pageId_' . $tsfe->id), 0);
+            if ($this->extcache) {
+                $this->extcache->set($cacheKey, $aMeta, array('pageId_' . $tsfe->id), 0);
+            }
         }
-        foreach ($aMeta as $k => $v) $conf['metaArray'][$k] = $v;
+        foreach ($aMeta as $k => $v) {
+            $conf['metaArray'][$k] = $v;
+        }
         return $conf['metaArray'];
     }
 
-    public static function checkType($s) {
+    public static function checkType($s)
+    {
         $ret = 'name';
-        $a = explode(':',$s);
+        $a = explode(':', $s);
 
         if (sizeof($a)>1) {
-            switch($a[0]) {
+            switch ($a[0]) {
                 case 'og':
                 case 'article':
                 case 'fb':
@@ -66,7 +73,7 @@ class MetaPostProcessHook {
                     break;
                 case 'gplus':
                     array_shift($a);
-                    $s = implode(':',$a);
+                    $s = implode(':', $a);
                     $ret = 'itemprop';
                     break;
                 default:
@@ -76,5 +83,4 @@ class MetaPostProcessHook {
         }
         return array($ret,$s);
     }
-
 }

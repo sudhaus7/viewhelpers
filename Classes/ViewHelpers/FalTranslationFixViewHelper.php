@@ -14,16 +14,17 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractDomainObject;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3\CMS\Frontend\Resource\FileCollector;
 
-class FalTranslationFixViewHelper extends AbstractViewHelper {
+class FalTranslationFixViewHelper extends AbstractViewHelper
+{
     protected $escapeOutput = false;
 
     public function initializeArguments()
     {
-        $this->registerArgument('record','mixed','The record to be matched',true);
-        $this->registerArgument('tableName','string','The tablename to be matched',true);
-        $this->registerArgument('relationFieldName','string','the field name in sys_file_reference',true);
-        $this->registerArgument('as','string','the name for the returend value',false,'files');
-        $this->registerArgument('renderExtbase','bool','wether to render as Extbase FielReference or Core FileReference, default: core',false,false);
+        $this->registerArgument('record', 'mixed', 'The record to be matched', true);
+        $this->registerArgument('tableName', 'string', 'The tablename to be matched', true);
+        $this->registerArgument('relationFieldName', 'string', 'the field name in sys_file_reference', true);
+        $this->registerArgument('as', 'string', 'the name for the returend value', false, 'files');
+        $this->registerArgument('renderExtbase', 'bool', 'wether to render as Extbase FielReference or Core FileReference, default: core', false, false);
     }
 
     /**
@@ -40,9 +41,9 @@ class FalTranslationFixViewHelper extends AbstractViewHelper {
         /** @var FileCollector $fileCollector */
         $fileCollector = GeneralUtility::makeInstance(FileCollector::class);
 
-        if ( $record instanceof AbstractDomainObject ) {
+        if ($record instanceof AbstractDomainObject) {
             $rawRecord = $this->getRawRecord($record, $tableName);
-        } elseif ( is_array($record) ) {
+        } elseif (is_array($record)) {
             $rawRecord = $record;
         } else {
             throw new \UnexpectedValueException('Supplied record must either be an AbstractDomainObject or an array.');
@@ -71,10 +72,11 @@ class FalTranslationFixViewHelper extends AbstractViewHelper {
         return $output;
     }
 
-    protected function getRawRecord($recordModel, $tableName) {
+    protected function getRawRecord($recordModel, $tableName)
+    {
         /** @var DatabaseConnection $db */
         $db = $GLOBALS['TYPO3_DB'];
-        $rawRecord = $db->exec_SELECTgetSingleRow('*',$tableName,'uid='.($recordModel->_getProperty('_localizedUid') ? $recordModel->_getProperty('_localizedUid') : $recordModel->getUid()). ' AND hidden=0 AND deleted=0');
+        $rawRecord = $db->exec_SELECTgetSingleRow('*', $tableName, 'uid='.($recordModel->_getProperty('_localizedUid') ? $recordModel->_getProperty('_localizedUid') : $recordModel->getUid()). ' AND hidden=0 AND deleted=0');
         return $rawRecord;
     }
 }

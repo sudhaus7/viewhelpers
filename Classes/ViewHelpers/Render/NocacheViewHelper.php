@@ -8,12 +8,12 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers\Render;
 
-
 /*
  * Inspiriert von vhs:render.uncache
  */
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+
 /**
  * Uncaches partials. Use like ``f:render``.
  * The partial will then be rendered each time.
@@ -24,26 +24,29 @@ use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
  * @package Vhs
  * @subpackage ViewHelpers\Render
  */
-class NocacheViewHelper extends AbstractViewHelper {
+class NocacheViewHelper extends AbstractViewHelper
+{
     /**
      * Initialize
      *
      * @return void
      */
-    public function initializeArguments() {
-        $this->registerArgument('partial', 'string', 'Reference to a partial.', TRUE);
-        $this->registerArgument('section', 'string', 'Name of section inside the partial to render.', FALSE, NULL);
-        $this->registerArgument('arguments', 'array', 'Arguments to pass to the partial.', FALSE, NULL);
+    public function initializeArguments()
+    {
+        $this->registerArgument('partial', 'string', 'Reference to a partial.', true);
+        $this->registerArgument('section', 'string', 'Name of section inside the partial to render.', false, null);
+        $this->registerArgument('arguments', 'array', 'Arguments to pass to the partial.', false, null);
     }
     /**
      * @return string
      */
-    public function render() {
+    public function render()
+    {
         $partialArguments = $this->arguments['arguments'];
-        if (FALSE === is_array($partialArguments)) {
+        if (false === is_array($partialArguments)) {
             $partialArguments = array();
         }
-        if (FALSE === isset($partialArguments['settings']) && TRUE === $this->templateVariableContainer->exists('settings')) {
+        if (false === isset($partialArguments['settings']) && true === $this->templateVariableContainer->exists('settings')) {
             $partialArguments['settings'] = $this->templateVariableContainer->get('settings');
         }
         $substKey = 'INT_SCRIPT.' . $GLOBALS['TSFE']->uniqueHash();

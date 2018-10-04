@@ -69,7 +69,7 @@ class YoutubemodalViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\MediaViewHelpe
     {
         parent::initializeArguments();
 
-      //  $this->registerUniversalTagAttributes();
+        //  $this->registerUniversalTagAttributes();
        // $this->registerTagAttribute('alt', 'string', 'Specifies an alternate text for an image', false);
     }
 
@@ -93,8 +93,8 @@ class YoutubemodalViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\MediaViewHelpe
 
 
 
-        list($movie,$img) = $this->youtuberender($file, $width, $height);
-        return sprintf('<a href="%s" class="colorbox-iframe youtube-playbutton"><img src="%s"/></a>',$movie,$img);
+        list($movie, $img) = $this->youtuberender($file, $width, $height);
+        return sprintf('<a href="%s" class="colorbox-iframe youtube-playbutton"><img src="%s"/></a>', $movie, $img);
 
 
 
@@ -154,7 +154,6 @@ class YoutubemodalViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\MediaViewHelpe
 
     public function youtuberender(FileInterface $file, $width, $height, array $options = null, $usedPathsRelativeToCurrentScript = false)
     {
-
         $options['autoplay'] = 1;
         $urlParams = ['autohide=1'];
         if (!isset($options['controls']) || !empty($options['controls'])) {
@@ -202,8 +201,6 @@ class YoutubemodalViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\MediaViewHelpe
         }
 
         return [$src,'https://img.youtube.com/vi/'.$videoId.'/maxresdefault.jpg'];
-
-
     }
 
     /**

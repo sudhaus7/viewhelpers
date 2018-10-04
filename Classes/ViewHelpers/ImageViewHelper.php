@@ -7,11 +7,13 @@
  */
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers;
+
 use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Extbase\Domain\Model\AbstractFileFolder;
 
-class ImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper {
+class ImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper
+{
     /**
      * Resizes a given image (if required) and renders the respective img tag
      *
@@ -31,7 +33,8 @@ class ImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper {
      * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
      * @return string Rendered tag
      */
-    public function render($src = null, $width = null, $height = null, $minWidth = null, $minHeight = null, $maxWidth = null, $maxHeight = null, $treatIdAsReference = false, $image = null, $crop = null, $absolute = false) {
+    public function render($src = null, $width = null, $height = null, $minWidth = null, $minHeight = null, $maxWidth = null, $maxHeight = null, $treatIdAsReference = false, $image = null, $crop = null, $absolute = false)
+    {
         if (is_null($src) && is_null($image) || !is_null($src) && !is_null($image)) {
             throw new \TYPO3\CMS\Fluid\Core\ViewHelper\Exception('You must either specify a string src or a File object.', 1382284106);
         }
@@ -39,7 +42,7 @@ class ImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper {
         /** @var \TYPO3\CMS\Extbase\Domain\Model\FileReference $image */
 
         /* FIX FOR TRANSLATION */
-        if (is_object($image) && $image instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference ) {
+        if (is_object($image) && $image instanceof \TYPO3\CMS\Extbase\Domain\Model\FileReference) {
             if ($image->_getProperty('_languageUid') > 0) {
                 $src = $image->_getProperty('_localizedUid');
                 $treatIdAsReference = 1;
@@ -91,7 +94,5 @@ class ImageViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\ImageViewHelper {
 
 
         return $this->tag->render();
-
     }
-    
 }

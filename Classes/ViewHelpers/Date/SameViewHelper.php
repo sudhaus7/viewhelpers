@@ -8,8 +8,8 @@
 
 namespace SUDHAUS7\Sudhaus7Viewhelpers\ViewHelpers\Date;
 
-
-class SameViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper {
+class SameViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionViewHelper
+{
     /**
      * Initializes the "role" argument.
      * Renders <f:then> child if the current logged in FE user belongs to the specified role (aka usergroup)
@@ -41,15 +41,17 @@ class SameViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractConditionV
         if (is_object($date1)) {
             $d1 = $date1->format($format);
         } else {
-            $d1 = date($format,$date1);
+            $d1 = date($format, $date1);
         }
         if (is_object($date2)) {
             $d2 = $date2->format($format);
         } else {
-            $d2 = date($format,$date2);
+            $d2 = date($format, $date2);
         }
 
-        if ($d1 == $d2) return true;
+        if ($d1 == $d2) {
+            return true;
+        }
         return false;
     }
 }

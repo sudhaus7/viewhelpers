@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-09-12T13:49:12Z">
+        <header>
+            <generator>LFEditor</generator>
+        </header>
+        <body>
+            <trans-unit id="field.posterimage.label" xml:space="preserve">
+				<source>Posterimage</source>
+				<target>Posterbild</target>
+			</trans-unit>
+        </body>
+    </file>
+</xliff>

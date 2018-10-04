@@ -47,3 +47,7 @@ CREATE TABLE cf_sudhaus7viewhelpers_cache_tags (
     KEY cache_id (identifier),
     KEY cache_tag (tag)
 ) ;
+
+CREATE TABLE sys_file_reference (
+    tx_sudhaus7viewhelpers_posterimage varchar(256) DEFAULT '' NOT NULL
+);

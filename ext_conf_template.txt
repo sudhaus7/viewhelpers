@@ -1,2 +1,6 @@
-	# cat=basic; type=boolean; label=Disable generation of canonical
+# cat=basic; type=boolean; label=Disable generation of canonical
 disableCanonical = 0
+
+
+# cat=basic; type=boolean; label=Enable Poster support for youtube,vimeo and mp4 in f-media
+enableMediaPoster = 0

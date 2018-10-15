@@ -58,8 +58,10 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
             }
             $cacheFile = $cacheDir.'/'.$videoId.'.jpg';
             if (!is_file($cacheFile)) {
-                $buf = file_get_contents('https://i.ytimg.com/vi/'.$videoId.'/hqdefault.jpg');
-                \file_put_contents($cacheFile, $buf);
+            	try {
+		            $buf = file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/hqdefault.jpg' );
+		            \file_put_contents( $cacheFile, $buf );
+	            } catch (\Exception $e) {}
             }
 
             $poster = 'src="/typo3temp/s7viewhelpers/youtube/'.$videoId.'.jpg"';

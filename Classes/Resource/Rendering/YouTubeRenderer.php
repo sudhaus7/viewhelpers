@@ -58,12 +58,40 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
                 \TYPO3\CMS\Core\Utility\GeneralUtility::mkdir($cacheDir);
             }
             $cacheFile = $cacheDir.'/'.$videoId.'.jpg';
-            if (!is_file($cacheFile)) {
-            	try {
-		            $buf = file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/hqdefault.jpg' );
-		            \file_put_contents( $cacheFile, $buf );
-	            } catch (\Exception $e) {}
+            $now = time()-86400;
+            if (is_file($cacheFile) && \filemtime( $cacheFile) < $now) {
+            	@unlink($cacheFile);
             }
+	        if (!is_file($cacheFile)) {
+		        try {
+			        $buf = file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/maxresdefault.jpg' );
+			        \file_put_contents( $cacheFile, $buf );
+		        } catch (\Exception $e) {}
+	        }
+	        if (!is_file($cacheFile)) {
+		        try {
+			        $buf = file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/hqdefault.jpg' );
+			        \file_put_contents( $cacheFile, $buf );
+		        } catch (\Exception $e) {}
+	        }
+	        if (!is_file($cacheFile)) {
+		        try {
+			        $buf = file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/mqdefault.jpg' );
+			        \file_put_contents( $cacheFile, $buf );
+		        } catch (\Exception $e) {}
+	        }
+	        if (!is_file($cacheFile)) {
+		        try {
+			        $buf = file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/sddefault.jpg' );
+			        \file_put_contents( $cacheFile, $buf );
+		        } catch (\Exception $e) {}
+	        }
+	        if (!is_file($cacheFile)) {
+		        try {
+			        $buf = file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/default.jpg' );
+			        \file_put_contents( $cacheFile, $buf );
+		        } catch (\Exception $e) {}
+	        }
 
             $poster = 'src="/typo3temp/s7viewhelpers/youtube/'.$videoId.'.jpg"';
         }

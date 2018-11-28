@@ -80,7 +80,7 @@ class VideoTagRenderer implements FileRendererInterface
 	            $wh = '';
 	            if ($width > 0) $wh .= ' width="'.$width.'"';
 	            if ($height > 0) $wh .= ' height="'.$height.'"';
-                return sprintf('<img %s %s data-replace="%s" %s onClick="%s" class="s7-poster-image"/><script type="text/javascript">var h=document.getElementById(\'clickslider-trigger-%d\');if(h){h.classList.add(\'clickslider\');}</script>', $poster,$wh,  \htmlentities($video),  str_replace("\n", ' ', $js), $uid);
+                return sprintf('<img %s %s data-replace="%s" onClick="%s" class="s7-poster-image"/><script type="text/javascript">var h=document.getElementById(\'clickslider-trigger-%d\');if(h){h.classList.add(\'clickslider\');}</script>', $poster,$wh,  \htmlentities($video),  str_replace("\n", ' ', $js), $uid);
             }
         }
 

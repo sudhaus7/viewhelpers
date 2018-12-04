@@ -111,8 +111,8 @@ class VimeoRenderer extends \TYPO3\CMS\Core\Resource\Rendering\VimeoRenderer
 
         $crop = $video instanceof FileReference ? $video->getProperty('crop') : null;
         $processingInstructions = [
-            'width' => $width,
-            'height' => $height,
+  //          'width' => $width,
+  //          'height' => $height,
             'crop' => $crop,
         ];
 

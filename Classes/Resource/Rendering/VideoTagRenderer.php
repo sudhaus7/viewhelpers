@@ -169,8 +169,8 @@ class VideoTagRenderer implements FileRendererInterface
 
         $crop = $video instanceof FileReference ? $video->getProperty('crop') : null;
         $processingInstructions = [
-            'width' => $width,
-            'height' => $height,
+       //     'width' => $width,
+       //     'height' => $height,
             'crop' => $crop,
         ];
 

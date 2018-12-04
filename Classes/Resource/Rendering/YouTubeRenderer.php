@@ -143,8 +143,8 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
 
         $crop = $video instanceof FileReference ? $video->getProperty('crop') : null;
         $processingInstructions = [
-            'width' => $width,
-            'height' => $height,
+           // 'width' => $width,
+           // 'height' => $height,
             'crop' => $crop,
         ];
 

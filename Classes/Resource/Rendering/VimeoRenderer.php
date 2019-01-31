@@ -46,10 +46,11 @@ class VimeoRenderer extends \TYPO3\CMS\Core\Resource\Rendering\VimeoRenderer
                 $orgFile = $file;
             }
             $videoId = $this->getOnlineMediaHelper($file)->getOnlineMediaId($orgFile);
-            $cacheDir = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName('typo3temp/assets/images/s7viewhelpers');
+            $directory = 'typo3temp/assets/images/s7viewhelpers';
             if (TYPO3_BRANCH == '7.6') {
-                $cacheDir = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName('typo3temp/s7viewhelpers');
+                $directory= 'typo3temp/s7viewhelpers';
             }
+            $cacheDir = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName($directory);
             if (!is_dir($cacheDir)) {
                 \TYPO3\CMS\Core\Utility\GeneralUtility::mkdir($cacheDir);
             }
@@ -64,7 +65,7 @@ class VimeoRenderer extends \TYPO3\CMS\Core\Resource\Rendering\VimeoRenderer
                 \file_put_contents($cacheFile, $buf);
             }
 
-            $poster = 'src="/typo3temp/s7viewhelpers/vimeo/'.$videoId.'.jpg"';
+            $poster = 'src="/'.$directory.'/vimeo/'.$videoId.'.jpg"';
         }
         $uid = $file->getProperty('uid_foreign');
         if (!empty($poster)) {

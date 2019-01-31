@@ -46,7 +46,10 @@ class VimeoRenderer extends \TYPO3\CMS\Core\Resource\Rendering\VimeoRenderer
                 $orgFile = $file;
             }
             $videoId = $this->getOnlineMediaHelper($file)->getOnlineMediaId($orgFile);
-            $cacheDir = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName('typo3temp/s7viewhelpers');
+            $cacheDir = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName('typo3temp/assets/images/s7viewhelpers');
+            if (TYPO3_BRANCH == '7.6') {
+                $cacheDir = \TYPO3\CMS\Core\Utility\GeneralUtility::getFileAbsFileName('typo3temp/s7viewhelpers');
+            }
             if (!is_dir($cacheDir)) {
                 \TYPO3\CMS\Core\Utility\GeneralUtility::mkdir($cacheDir);
             }

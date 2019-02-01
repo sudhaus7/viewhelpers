@@ -37,6 +37,7 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
     ) {
 
         $options['autoplay']=1;
+        $options['autoplay'] = isset($options['autoplay']) ? $options['autoplay'] : true;
         $youtube = parent::render($file, $width, $height, $options, $usedPathsRelativeToCurrentScript);
 
 
@@ -100,6 +101,9 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
             $poster = 'src="/'.$directory.'/youtube/'.$videoId.'.jpg"';
         }
         $uid = $file->getProperty('uid_foreign');
+        if (empty($uid)) {
+            $uid = $file->getUid();
+        }
         if (!empty($poster)) {
             $js = "
 				var self=this;
@@ -115,6 +119,9 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
 	        $wh = '';
 	        if ($width > 0) $wh .= ' width="'.$width.'"';
 	        if ($height > 0) $wh .= ' height="'.$height.'"';
+	        if (!$options['autoplay']) {
+                return sprintf('<img %s %s data-replace="%s" class="s7-poster-image"/>', $poster, $wh, \htmlentities($youtube));
+            }
             return sprintf('<img %s %s data-replace="%s"  onClick="%s" class="s7-poster-image"/><script type="text/javascript">var h=document.getElementById(\'clickslider-trigger-%d\');if(h){h.classList.add(\'clickslider\');}</script>', $poster, $wh, \htmlentities($youtube), str_replace("\n", ' ', $js), $uid);
         }
         return parent::render($file, $width, $height, $options, $usedPathsRelativeToCurrentScript);

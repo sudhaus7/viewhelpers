@@ -37,7 +37,7 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
     ) {
 
         $options['autoplay']=1;
-        $options['useInternalJavascript'] = isset($options['useInternalJavascript']) ? $options['useInternalJavascript'] : true;
+        $options['useInternalJavascript'] = isset($options['useInternalJavascript']) ? (bool)$options['useInternalJavascript'] : true;
         $youtube = parent::render($file, $width, $height, $options, $usedPathsRelativeToCurrentScript);
 
 

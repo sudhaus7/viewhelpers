@@ -43,7 +43,6 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
 	    $properties = [];
         if ($file->hasProperty( 'tx_sudhaus7viewhelpers_posterimage') && !empty($file->getProperty('tx_sudhaus7viewhelpers_posterimage'))) {
 	        list($poster,$properties) = $this->renderImage($file, $width, $height);
-	        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump();
         } else {
             if ($file instanceof FileReference) {
                 $orgFile = $file->getOriginalFile();
@@ -169,7 +168,7 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
            // 'height' => $height,
             'crop' => $crop,
         ];
-	    $image->_getMetaData();
+
 
 
         $imageService = $objectManager->get(ImageService::class);
@@ -181,7 +180,7 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
         $ret[]=sprintf('width="%s"', $processedImage->getProperty('width'));
         $ret[]=sprintf('height="%s"', $processedImage->getProperty('height'));
 
-
+	    $image->_getMetaData();
 	    return [implode(" ", $ret),$image->getProperties()];
     }
 }

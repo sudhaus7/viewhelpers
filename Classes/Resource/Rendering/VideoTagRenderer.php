@@ -186,7 +186,7 @@ class VideoTagRenderer implements FileRendererInterface
             'crop' => $crop,
         ];
 
-        $image->_getMetaData();
+
 
         $imageService = $objectManager->get(ImageService::class);
         $processedImage = $imageService->applyProcessingInstructions($image, $processingInstructions);
@@ -197,7 +197,7 @@ class VideoTagRenderer implements FileRendererInterface
         $ret[]=sprintf('width="%s"', $processedImage->getProperty('width'));
         $ret[]=sprintf('height="%s"', $processedImage->getProperty('height'));
 
-
+	    $image->_getMetaData();
         return [implode(" ", $ret),$image->getProperties()];
     }
 }

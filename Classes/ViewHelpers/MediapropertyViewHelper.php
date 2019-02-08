@@ -24,26 +24,28 @@ class MediapropertyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
 
         $file = $this->arguments['file'];
         $type = '0';
-        if (is_array($file)) {
-            //$type = $file['type'];
-            $s = $file[$this->arguments['property']];
-        } else {
-            if (get_class($file) == \TYPO3\CMS\Extbase\Domain\Model\FileReference::class) {
-                try {
-                    $file = $file->getOriginalResource();
-                    //$file = new \TYPO3\CMS\Core\Resource\FileReference(['uid_local' => $file->getOriginalResource()->getUid()]);
-                } catch (\Exception $e) {
-                    return '';
-                }
-            }
-            if (get_class($file) == \TYPO3\CMS\Core\Resource\FileReference::class) {
-                // sorge dafür, dass in jedem Fall die Metadaten geladen sind
-                $file->getOriginalFile()->_getMetaData();
-                $s = $file->getProperties()[$this->arguments['property']];
-                //$s = $file->getProperty($this->arguments['property']);
-              //  $type = $file->getProperty('type');
+	    if (\is_array($file)) {
+		    // lets assume its a record from sys_file_reference
+		    $file = new \TYPO3\CMS\Core\Resource\FileReference($file);
+	    }
+
+
+        if (get_class($file) == \TYPO3\CMS\Extbase\Domain\Model\FileReference::class) {
+            try {
+                $file = $file->getOriginalResource();
+                //$file = new \TYPO3\CMS\Core\Resource\FileReference(['uid_local' => $file->getOriginalResource()->getUid()]);
+            } catch (\Exception $e) {
+                return '';
             }
         }
+        if (get_class($file) == \TYPO3\CMS\Core\Resource\FileReference::class) {
+            // sorge dafür, dass in jedem Fall die Metadaten geladen sind
+            $file->getOriginalFile()->_getMetaData();
+            $s = $file->getProperties()[$this->arguments['property']];
+            //$s = $file->getProperty($this->arguments['property']);
+          //  $type = $file->getProperty('type');
+        }
+
         //    if ($type=='3') return '';
         if (!empty($s)) {
             if (!empty($this->arguments['prepend'])) {

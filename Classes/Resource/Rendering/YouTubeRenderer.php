@@ -12,6 +12,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
+use TYPO3\CMS\Core\Resource\Rendering\FileRendererInterface;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Extbase\Service\ImageService;
 
@@ -120,7 +121,12 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
 	        if ($width > 0) $wh .= ' width="'.$width.'"';
 	        if ($height > 0) $wh .= ' height="'.$height.'"';
 
-	        $imgtag = sprintf('<img %s %s data-replace="%s" class="s7-poster-image"/>', $poster, $wh, \htmlentities($youtube));
+	        if ($options['useInternalJavascript'] === false) {
+		        $imgtag = sprintf('<img %s %s data-replace="%s" class="s7-poster-image"/>', $poster, $wh, \htmlentities($youtube));
+	        } else {
+		        $imgtag = sprintf('<img %s %s data-replace="%s"  onClick="%s" class="s7-poster-image"/>', $poster, $wh, \htmlentities($youtube), str_replace("\n", ' ', $js));
+
+	        }
 	        /** @var Dispatcher $signalSlotDispatcher */
 	        $signalSlotDispatcher = GeneralUtility::makeInstance(Dispatcher::class);
 	        try {
@@ -132,7 +138,7 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
 	        if ($options['useInternalJavascript'] === false) {
                 return $imgtag;
             }
-            return sprintf('%s<script type="text/javascript">var h=document.getElementById(\'clickslider-trigger-%d\');if(h){h.classList.add(\'clickslider\');}</script>', $imgtag, str_replace("\n", ' ', $js), $uid);
+            return sprintf('%s<script type="text/javascript">var h=document.getElementById(\'clickslider-trigger-%d\');if(h){h.classList.add(\'clickslider\');}</script>', $imgtag, $uid);
         }
         return parent::render($file, $width, $height, $options, $usedPathsRelativeToCurrentScript);
     }

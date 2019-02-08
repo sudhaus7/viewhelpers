@@ -25,12 +25,14 @@ class MediapropertyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
         $file = $this->arguments['file'];
         $type = '0';
 	    if (\is_array($file)) {
+
 		    // lets assume its a record from sys_file_reference
 		    $file = new \TYPO3\CMS\Core\Resource\FileReference($file);
 	    }
 
 
-        if (get_class($file) == \TYPO3\CMS\Extbase\Domain\Model\FileReference::class) {
+
+        if (get_class($file) == \TYPO3\CMS\Extbase\Domain\Model\FileReference::class || is_subclass_of($file,\TYPO3\CMS\Extbase\Domain\Model\FileReference::class )) {
             try {
                 $file = $file->getOriginalResource();
                 //$file = new \TYPO3\CMS\Core\Resource\FileReference(['uid_local' => $file->getOriginalResource()->getUid()]);

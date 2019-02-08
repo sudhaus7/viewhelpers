@@ -43,6 +43,7 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
 	    $properties = [];
         if ($file->hasProperty( 'tx_sudhaus7viewhelpers_posterimage') && !empty($file->getProperty('tx_sudhaus7viewhelpers_posterimage'))) {
 	        list($poster,$properties) = $this->renderImage($file, $width, $height);
+	        \TYPO3\CMS\Extbase\Utility\DebuggerUtility::var_dump();
         } else {
             if ($file instanceof FileReference) {
                 $orgFile = $file->getOriginalFile();
@@ -124,14 +125,15 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
 	        /** @var Dispatcher $signalSlotDispatcher */
 	        $signalSlotDispatcher = GeneralUtility::makeInstance(Dispatcher::class);
 	        try {
-		        $data = $signalSlotDispatcher->dispatch(__CLASS__, 'imgTag', [ 'imgtag'=>$imgtag,'properties'=>$properties ]);
+	        	$data = [ 'imgtag'=>$imgtag,'properties'=>$properties ];
+		        $data = $signalSlotDispatcher->dispatch(__CLASS__, 'imgTag', [$data]);
 		        $imgtag = $data[0]['imgtag'];
 	        } catch (\Exception $e) {
 	        }
 	        if ($options['useInternalJavascript'] === false) {
                 return $imgtag;
             }
-            return sprintf('%s<script type="text/javascript">var h=document.getElementById(\'clickslider-trigger-%d\');if(h){h.classList.add(\'clickslider\');}</script>', $imgtag, \htmlentities($youtube), str_replace("\n", ' ', $js), $uid);
+            return sprintf('%s<script type="text/javascript">var h=document.getElementById(\'clickslider-trigger-%d\');if(h){h.classList.add(\'clickslider\');}</script>', $imgtag, str_replace("\n", ' ', $js), $uid);
         }
         return parent::render($file, $width, $height, $options, $usedPathsRelativeToCurrentScript);
     }
@@ -140,7 +142,7 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
      * @param $width
      * @param $height
      *
-     * @return string
+     * @return array
      */
     protected function renderImage(FileInterface $video, $width, $height)
     {
@@ -169,6 +171,7 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
         ];
 	    $image->_getMetaData();
 
+
         $imageService = $objectManager->get(ImageService::class);
         $processedImage = $imageService->applyProcessingInstructions($image, $processingInstructions);
         $imageUri = $imageService->getImageUri($processedImage);
@@ -179,6 +182,6 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
         $ret[]=sprintf('height="%s"', $processedImage->getProperty('height'));
 
 
-	    return [implode(" ", $ret),$image->properties_];
+	    return [implode(" ", $ret),$image->getProperties()];
     }
 }

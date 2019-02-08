@@ -82,15 +82,16 @@ class VideoTagRenderer implements FileRendererInterface
 	            if ($width > 0) $wh .= ' width="'.$width.'"';
 	            if ($height > 0) $wh .= ' height="'.$height.'"';
 
-	            $imgtag = sprintf('<img %s %s data-replace="%s" onClick="%s" class="s7-poster-image"/>', $poster,$wh);
+	            $imgtag = sprintf('<img %s %s data-replace="%s" onClick="%s" class="s7-poster-image"/>', $poster,$wh,  \htmlentities($video));
 	            /** @var Dispatcher $signalSlotDispatcher */
 	            $signalSlotDispatcher = GeneralUtility::makeInstance(Dispatcher::class);
 	            try {
-		            $data = $signalSlotDispatcher->dispatch(__CLASS__, 'imgTag', [ 'imgtag'=>$imgtag,'properties'=>$properties ]);
+	            	$data = [ 'imgtag'=>$imgtag,'properties'=>$properties ];
+		            $data = $signalSlotDispatcher->dispatch(__CLASS__, 'imgTag', [$data]);
 		            $imgtag = $data[0]['imgtag'];
 	            } catch (\Exception $e) {
 	            }
-                return sprintf('%s<script type="text/javascript">var h=document.getElementById(\'clickslider-trigger-%d\');if(h){h.classList.add(\'clickslider\');}</script>', $imgtag,  \htmlentities($video),  str_replace("\n", ' ', $js), $uid);
+                return sprintf('%s<script type="text/javascript">var h=document.getElementById(\'clickslider-trigger-%d\');if(h){h.classList.add(\'clickslider\');}</script>', $imgtag,  str_replace("\n", ' ', $js), $uid);
             }
         }
 
@@ -156,7 +157,7 @@ class VideoTagRenderer implements FileRendererInterface
      * @param $width
      * @param $height
      *
-     * @return string
+     * @return array
      */
     protected function renderImage(FileInterface $video, $width, $height)
     {
@@ -197,6 +198,6 @@ class VideoTagRenderer implements FileRendererInterface
         $ret[]=sprintf('height="%s"', $processedImage->getProperty('height'));
 
 
-        return [implode(" ", $ret),$image->properties_];
+        return [implode(" ", $ret),$image->getProperties()];
     }
 }

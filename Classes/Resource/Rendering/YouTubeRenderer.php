@@ -180,7 +180,7 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
         $ret[]=sprintf('width="%s"', $processedImage->getProperty('width'));
         $ret[]=sprintf('height="%s"', $processedImage->getProperty('height'));
 
-	    $image->_getMetaData();
+	    //$image->_getMetaData();
 	    return [implode(" ", $ret),$image->getProperties()];
     }
 }

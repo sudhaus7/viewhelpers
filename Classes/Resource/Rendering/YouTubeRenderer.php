@@ -11,7 +11,7 @@ namespace SUDHAUS7\Sudhaus7Viewhelpers\Resource\Rendering;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Resource\FileReference;
-use TYPO3\CMS\Core\Resource\Rendering\FileRendererInterface;
+use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Extbase\Service\ImageService;
 
@@ -40,9 +40,9 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
         $options['useInternalJavascript'] = isset($options['useInternalJavascript']) ? (bool)$options['useInternalJavascript'] : true;
         $youtube = parent::render($file, $width, $height, $options, $usedPathsRelativeToCurrentScript);
 
-
+	    $properties = [];
         if ($file->hasProperty( 'tx_sudhaus7viewhelpers_posterimage') && !empty($file->getProperty('tx_sudhaus7viewhelpers_posterimage'))) {
-            $poster = $this->renderImage($file, $width, $height);
+	        list($poster,$properties) = $this->renderImage($file, $width, $height);
         } else {
             if ($file instanceof FileReference) {
                 $orgFile = $file->getOriginalFile();
@@ -119,10 +119,19 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
 	        $wh = '';
 	        if ($width > 0) $wh .= ' width="'.$width.'"';
 	        if ($height > 0) $wh .= ' height="'.$height.'"';
+
+	        $imgtag = sprintf('<img %s %s data-replace="%s" class="s7-poster-image"/>', $poster, $wh, \htmlentities($youtube));
+	        /** @var Dispatcher $signalSlotDispatcher */
+	        $signalSlotDispatcher = GeneralUtility::makeInstance(Dispatcher::class);
+	        try {
+		        $data = $signalSlotDispatcher->dispatch(__CLASS__, 'imgTag', [ 'imgtag'=>$imgtag,'properties'=>$properties ]);
+		        $imgtag = $data[0]['imgtag'];
+	        } catch (\Exception $e) {
+	        }
 	        if ($options['useInternalJavascript'] === false) {
-                return sprintf('<img %s %s data-replace="%s" class="s7-poster-image"/>', $poster, $wh, \htmlentities($youtube));
+                return $imgtag;
             }
-            return sprintf('<img %s %s data-replace="%s"  onClick="%s" class="s7-poster-image"/><script type="text/javascript">var h=document.getElementById(\'clickslider-trigger-%d\');if(h){h.classList.add(\'clickslider\');}</script>', $poster, $wh, \htmlentities($youtube), str_replace("\n", ' ', $js), $uid);
+            return sprintf('%s<script type="text/javascript">var h=document.getElementById(\'clickslider-trigger-%d\');if(h){h.classList.add(\'clickslider\');}</script>', $imgtag, \htmlentities($youtube), str_replace("\n", ' ', $js), $uid);
         }
         return parent::render($file, $width, $height, $options, $usedPathsRelativeToCurrentScript);
     }
@@ -158,7 +167,7 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
            // 'height' => $height,
             'crop' => $crop,
         ];
-
+	    $image->_getMetaData();
 
         $imageService = $objectManager->get(ImageService::class);
         $processedImage = $imageService->applyProcessingInstructions($image, $processingInstructions);
@@ -170,6 +179,6 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
         $ret[]=sprintf('height="%s"', $processedImage->getProperty('height'));
 
 
-        return implode(" ", $ret);
+	    return [implode(" ", $ret),$image->properties_];
     }
 }

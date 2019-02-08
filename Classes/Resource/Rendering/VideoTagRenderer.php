@@ -14,6 +14,7 @@ use TYPO3\CMS\Core\Resource\FileReference;
 use TYPO3\CMS\Core\Resource\Rendering\FileRendererInterface;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Extbase\Service\ImageService;
+use TYPO3\CMS\Extbase\SignalSlot\Dispatcher;
 
 class VideoTagRenderer implements FileRendererInterface
 {
@@ -61,7 +62,7 @@ class VideoTagRenderer implements FileRendererInterface
         $usedPathsRelativeToCurrentScript = false
     ) {
         if ($file->hasProperty( 'tx_sudhaus7viewhelpers_posterimage') &&  !empty($file->getProperty('tx_sudhaus7viewhelpers_posterimage'))) {
-            $poster = $this->renderImage($file, $width, $height);
+            list($poster,$properties) = $this->renderImage($file, $width, $height);
             $uid = $file->getProperty('uid_foreign');
             if (!empty($poster)) {
                 $options['autoplay']=1;
@@ -80,7 +81,16 @@ class VideoTagRenderer implements FileRendererInterface
 	            $wh = '';
 	            if ($width > 0) $wh .= ' width="'.$width.'"';
 	            if ($height > 0) $wh .= ' height="'.$height.'"';
-                return sprintf('<img %s %s data-replace="%s" onClick="%s" class="s7-poster-image"/><script type="text/javascript">var h=document.getElementById(\'clickslider-trigger-%d\');if(h){h.classList.add(\'clickslider\');}</script>', $poster,$wh,  \htmlentities($video),  str_replace("\n", ' ', $js), $uid);
+
+	            $imgtag = sprintf('<img %s %s data-replace="%s" onClick="%s" class="s7-poster-image"/>', $poster,$wh);
+	            /** @var Dispatcher $signalSlotDispatcher */
+	            $signalSlotDispatcher = GeneralUtility::makeInstance(Dispatcher::class);
+	            try {
+		            $data = $signalSlotDispatcher->dispatch(__CLASS__, 'imgTag', [ 'imgtag'=>$imgtag,'properties'=>$properties ]);
+		            $imgtag = $data[0]['imgtag'];
+	            } catch (\Exception $e) {
+	            }
+                return sprintf('%s<script type="text/javascript">var h=document.getElementById(\'clickslider-trigger-%d\');if(h){h.classList.add(\'clickslider\');}</script>', $imgtag,  \htmlentities($video),  str_replace("\n", ' ', $js), $uid);
             }
         }
 
@@ -167,6 +177,7 @@ class VideoTagRenderer implements FileRendererInterface
             return '';
         }
 
+        //$metadata = $image->_getMetaData();
         $crop = $video instanceof FileReference ? $video->getProperty('crop') : null;
         $processingInstructions = [
        //     'width' => $width,
@@ -174,6 +185,7 @@ class VideoTagRenderer implements FileRendererInterface
             'crop' => $crop,
         ];
 
+        $image->_getMetaData();
 
         $imageService = $objectManager->get(ImageService::class);
         $processedImage = $imageService->applyProcessingInstructions($image, $processingInstructions);
@@ -185,6 +197,6 @@ class VideoTagRenderer implements FileRendererInterface
         $ret[]=sprintf('height="%s"', $processedImage->getProperty('height'));
 
 
-        return implode(" ", $ret);
+        return [implode(" ", $ret),$image->properties_];
     }
 }

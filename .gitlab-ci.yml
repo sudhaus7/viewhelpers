@@ -1,0 +1,23 @@
+stages:
+  - pages
+
+
+pages:
+  image: php:7.2-cli
+  stage: pages
+  variables:
+    SCANNER_RELEASE: "https://github.com/Tuurlijk/typo3scan/releases/download/1.6.2/typo3scan.phar"
+  script:
+    - curl -L $SCANNER_RELEASE --output typo3scan.phar
+    - php ./typo3scan.phar
+    - mkdir -p public
+    - ls -la
+    - php ./typo3scan.phar scan --target 7 --format html . > public/Report_Deprecations_v7.html
+    - php ./typo3scan.phar scan --target 8 --format html . > public/Report_Deprecations_v8.html
+    - php ./typo3scan.phar scan --target 9 --format html . > public/Report_Deprecations_v9.html
+    - php -r 'echo "<html><body><pre>";if($d=opendir("public/")){while($e=readdir($d)){if(is_file("public/".$e)){printf("<a href=\"%s\">%s</a>\n",$e,$e);}}}echo "</pre></body></html>";' > public/index.html
+
+  artifacts:
+    when: on_success
+    paths:
+      - public

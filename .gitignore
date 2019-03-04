@@ -54,3 +54,5 @@ vendor/
 # composer.lock
 
 # Created by .ignore support plugin (hsz.mobi)
+/composer.lock
+/.Build/

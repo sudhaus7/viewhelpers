@@ -102,24 +102,11 @@ class RenderPostProcessHook
                 $id = $page['uid'];
                 unset($getParams['id']);
 
-                /*
-                 * Problem: getTypoLink_URL can return an absolute url if configured properly
-                 */
-                /*
-                $url = $GLOBALS['TSFE']->cObj->getTypoLink_URL($id, $getParams);
-                if (substr($url,0,4)!='http') $url = $params['baseUrl'] . $url;
-                */
-                // preferred method
-                //if (substr($url,0,4)!='http') {
                 $url = $GLOBALS['TSFE']->cObj->typoLink('', ['parameter' => $id,
                                                             'additionalParams' => GeneralUtility::implodeArrayForUrl('', $getParams),
                                                             'forceAbsoluteUrl' => 1,
                                                             'returnLast' => 'url']);
-                //}
-
-
-
-
+                
                 if (strpos($url, '//', 8) !== false) {
                     $url = substr($url, 0, -1);
                 }
@@ -135,7 +122,7 @@ class RenderPostProcessHook
                 );
             }
 
-            if (isset($metaArray['og:url']) && isset($metaArray['og:url']['content'])) {
+            if (isset($metaArray['og:url']) && isset($metaArray['og:url']['content']) && (!isset($settings['disableCanonical']) || !$settings['disableCanonical'])) {
                 $newMeta[] = '<link rel="canonical" href="' . $metaArray['og:url']['content'] . '" />';
             }
 

@@ -1,5 +1,5 @@
 {
-  "name": "SUDHAUS7/sudhaus7-viewhelpers",
+  "name": "sudhaus7/sudhaus7-viewhelpers",
   "description": "(Sudhaus7) Viewhelpers and other basics",
   "version": "1.0.33",
   "type": "typo3-cms-extension",
@@ -7,20 +7,58 @@
   "authors": [
     {
       "name": "Frank Berger",
-      "role": "Developer"
+      "role": "Developer",
+      "email": "fberger@sudhaus7.de"
     },
     {
       "name": "Markus Hofmann",
-      "role": "Developer"
+      "role": "Developer",
+      "email": "mhofmann@sudhaus7.de"
+    },
+    {
+      "name": "Daniel Simon",
+      "role": "Developer",
+      "email": "dsimon@sudhaus7.de"
+    },
+    {
+      "name": "Patricia Ottmar",
+      "role": "Developer",
+      "email": "pottmar@12bis3.de"
     }
   ],
   "require": {
-    "typo3/cms-core": ">=6.2,<9.0"
+    "php": "~5.6.0 || ~7.0.0 || ~7.1.0 || ~7.2.0",
+    "typo3/cms-core": "^7.6.23 || ^8.7.10",
+    "typo3/cms-fluid": "^7.6.23 || ^8.7.10",
+    "typo3/cms-frontend": "^7.6.23 || ^8.7.10"
+
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.3.0",
+    "typo3/cms-fluid-styled-content": "^7.6.23 || ^8.7.10",
+    "helhum/typo3-composer-setup": "^0.5.1",
+    "helmich/typo3-typoscript-lint": "^1.4.4",
+    "nimut/testing-framework": "^3.0",
+    "roave/security-advisories": "dev-master"
+  },
+  "replace": {
+    "sudhaus7_viewhelpers": "self.version"
   },
 
+  "config": {
+    "preferred-install": {
+      "*": "dist"
+    },
+    "vendor-dir": ".Build/vendor"
+  },
   "extra": {
     "branch-alias": {
       "dev-master": "1.0.x-dev"
+    },
+    "typo3/cms": {
+      "extension-key": "sudhaus7_viewhelpers",
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "web-dir": ".Build/public"
     }
   },
   "autoload": {

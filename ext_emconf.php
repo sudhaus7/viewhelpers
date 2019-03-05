@@ -19,6 +19,7 @@ $EM_CONF[$_EXTKEY] = array(
     'lockType' => '',
     'author_company' => '',
     'version' => '1.0.34',
+    
     'constraints' => array(
         'depends' => array(
             'typo3' => '6.2.0-8.7.99'

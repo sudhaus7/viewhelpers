@@ -3,7 +3,7 @@
   "description": "(Sudhaus7) Viewhelpers and other basics",
   "version": "1.0.34",
   "type": "typo3-cms-extension",
-  "license": "",
+  "license": "proprietary",
   "authors": [
     {
       "name": "Frank Berger",

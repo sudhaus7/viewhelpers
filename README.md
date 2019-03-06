@@ -19,6 +19,7 @@ Slots:
 - metadataAfterImage - after guessing the image for example for og:image. Parameters: $params, $metaArray
 - generateCannonical - chance to influence the cannonical URL. Parameter: $url
 - newMetadata = array of the metadata to be set, wrapped in tags. Parameter: $newMeta
+- finish = last chance to change $params. Parameter: $params
 
 ### Markers
 the Marker ###CANONICALURL### will be replaced with the generated cannonical URL throughout the Document.

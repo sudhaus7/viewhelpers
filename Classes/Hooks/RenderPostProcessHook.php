@@ -43,6 +43,7 @@ class RenderPostProcessHook
             }
             
             
+            
             $metaArray = array(
                 'og:title' => array(
                     'property' => 'og:title',
@@ -181,6 +182,10 @@ class RenderPostProcessHook
                 foreach ($params['headerData'] as $k => $v) {
                     $params['headerData'][$k] = str_replace('###CANONICALURL###', $metaArray['og:url']['content'], $v);
                 }
+            }
+            try {
+                list($params) = $signalSlotDispatcher->dispatch(__CLASS__, 'finish', [ $params ]);
+            } catch (\Exception $e) {
             }
             return;
         }

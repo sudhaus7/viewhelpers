@@ -184,7 +184,7 @@ class RenderPostProcessHook
                 }
             }
             try {
-                list($params) = $signalSlotDispatcher->dispatch(__CLASS__, 'finish', [ $params ]);
+                list($params, $metaArray) = $signalSlotDispatcher->dispatch(__CLASS__, 'finish', [ $params, $metaArray ]);
             } catch (\Exception $e) {
             }
             return;

@@ -15,6 +15,12 @@ class RenderPostProcessHook
      */
     public function render(&$params, &$pObj)
     {
+        /** @var Dispatcher $signalSlotDispatcher */
+        $signalSlotDispatcher = GeneralUtility::makeInstance(Dispatcher::class);
+        
+        
+        
+        
         $settings = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['sudhaus7_viewhelpers']);
         if (TYPO3_MODE == "FE") {
             $page = $GLOBALS['TSFE']->page;
@@ -30,7 +36,13 @@ class RenderPostProcessHook
                     $params['title'] = $pagetitle;
                 }
             }
-
+    
+            try {
+                list($params) = $signalSlotDispatcher->dispatch(__CLASS__, 'paramsAfterTitle', [ $params ]);
+            } catch (\Exception $e) {
+            }
+            
+            
             $metaArray = array(
                 'og:title' => array(
                     'property' => 'og:title',
@@ -85,6 +97,12 @@ class RenderPostProcessHook
                     );
                 }
             }
+    
+            try {
+                list($params, $metaArray) = $signalSlotDispatcher->dispatch(__CLASS__, 'metadataAfterImage', [ $params, $metaArray ]);
+            } catch (\Exception $e) {
+            }
+            
             // Hook for extensions to manipulate meta tags, beware to check if you are on page with your extension
             if (is_array($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Sudhaus7Viewhelpers']['RenderPostProcessHook'])) {
                 ksort($GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['Sudhaus7Viewhelpers']['RenderPostProcessHook'], SORT_NATURAL);
@@ -110,8 +128,7 @@ class RenderPostProcessHook
                 if (strpos($url, '//', 8) !== false) {
                     $url = substr($url, 0, -1);
                 }
-                /** @var Dispatcher $signalSlotDispatcher */
-                $signalSlotDispatcher = GeneralUtility::makeInstance(Dispatcher::class);
+               
                 try {
                     list($url) = $signalSlotDispatcher->dispatch(__CLASS__, 'generateCannonical', [ $url ]);
                 } catch (\Exception $e) {
@@ -140,6 +157,12 @@ class RenderPostProcessHook
                 $tag .= " >";
                 $newMeta[] = $tag;
             }
+    
+            try {
+                list($newMeta) = $signalSlotDispatcher->dispatch(__CLASS__, 'newMetadata', [ $newMeta ]);
+            } catch (\Exception $e) {
+            }
+            
             $params['headerData'] = array_merge($params['headerData'], $newMeta);
             if (isset($GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY']) && !empty($GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY'])) {
                 foreach ($GLOBALS['SUDHAUS7_ADDAFTER_REGISTRY'] as $k=>$v) {

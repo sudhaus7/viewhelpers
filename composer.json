@@ -1,7 +1,7 @@
 {
   "name": "sudhaus7/sudhaus7-viewhelpers",
   "description": "(Sudhaus7) Viewhelpers and other basics",
-  "version": "1.0.36",
+  "version": "1.0.37",
   "type": "typo3-cms-extension",
   "license": "proprietary",
   "authors": [

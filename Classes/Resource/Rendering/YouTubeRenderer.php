@@ -59,7 +59,7 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
             if (!is_dir($cacheDir)) {
                 \TYPO3\CMS\Core\Utility\GeneralUtility::mkdir($cacheDir);
             }
-            $cacheDir .= '/youtube';
+            $cacheDir .= '/youtube2';
             if (!is_dir($cacheDir)) {
                 \TYPO3\CMS\Core\Utility\GeneralUtility::mkdir($cacheDir);
             }

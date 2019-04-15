@@ -14,7 +14,7 @@ call_user_func(function () {
         $newColumns = [
 
             'tx_sudhaus7viewhelpers_posterimage' => [
-                'displayCond' => 'USER:' . \SUDHAUS7\Sudhaus7Viewhelpers\Backend\Displayconds\Conditions::class . '->showPosterimageField',
+                //'displayCond' => 'USER:' . \SUDHAUS7\Sudhaus7Viewhelpers\Backend\Displayconds\Conditions::class . '->showPosterimageField',
                 'exclude'     => 0,
                 'label'       => $languageFilePrefix . 'field.posterimage.label',
                 'config' => array(

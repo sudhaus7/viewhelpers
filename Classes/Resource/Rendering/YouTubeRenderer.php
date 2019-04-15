@@ -65,37 +65,37 @@ class YouTubeRenderer extends \TYPO3\CMS\Core\Resource\Rendering\YouTubeRenderer
             }
             $cacheFile = $cacheDir.'/'.$videoId.'.jpg';
             $now = time()-86400;
-            if (is_file($cacheFile) && \filemtime( $cacheFile) < $now) {
+            if (is_file($cacheFile) && (\filemtime( $cacheFile) < $now || \filesize( $cacheFile) == 0) ) {
             	@unlink($cacheFile);
             }
 	        if (!is_file($cacheFile)) {
 		        try {
-			        $buf = file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/maxresdefault.jpg' );
-			        \file_put_contents( $cacheFile, $buf );
+			        $buf = @file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/maxresdefault.jpg' );
+			        if ($buf) \file_put_contents( $cacheFile, $buf );
 		        } catch (\Exception $e) {}
 	        }
 	        if (!is_file($cacheFile)) {
 		        try {
-			        $buf = file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/hqdefault.jpg' );
-			        \file_put_contents( $cacheFile, $buf );
+			        $buf = @file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/hqdefault.jpg' );
+			        if ($buf) \file_put_contents( $cacheFile, $buf );
 		        } catch (\Exception $e) {}
 	        }
 	        if (!is_file($cacheFile)) {
 		        try {
-			        $buf = file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/mqdefault.jpg' );
-			        \file_put_contents( $cacheFile, $buf );
+			        $buf = @file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/mqdefault.jpg' );
+			        if ($buf) \file_put_contents( $cacheFile, $buf );
 		        } catch (\Exception $e) {}
 	        }
 	        if (!is_file($cacheFile)) {
 		        try {
-			        $buf = file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/sddefault.jpg' );
-			        \file_put_contents( $cacheFile, $buf );
+			        $buf = @file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/sddefault.jpg' );
+			        if ($buf) \file_put_contents( $cacheFile, $buf );
 		        } catch (\Exception $e) {}
 	        }
 	        if (!is_file($cacheFile)) {
 		        try {
-			        $buf = file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/default.jpg' );
-			        \file_put_contents( $cacheFile, $buf );
+			        $buf = @file_get_contents( 'https://i3.ytimg.com/vi/' . $videoId . '/default.jpg' );
+			        if ($buf) \file_put_contents( $cacheFile, $buf );
 		        } catch (\Exception $e) {}
 	        }
 

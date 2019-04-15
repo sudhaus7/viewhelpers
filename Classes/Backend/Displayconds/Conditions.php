@@ -12,7 +12,7 @@ class Conditions
 {
     public function showPosterimageField($config)
     {
-    	if ($config['flexformValueKey'] == 'vDEF') return false;
+//    	if ($config['flexformValueKey'] == 'vDEF') return false;
 
         return true;
     }

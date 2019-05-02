@@ -160,7 +160,7 @@ class RenderPostProcessHook
             }
     
             try {
-                list($newMeta) = $signalSlotDispatcher->dispatch(__CLASS__, 'newMetadata', [ $newMeta ]);
+                list($newMeta) = $signalSlotDispatcher->dispatch(__CLASS__, 'newMetadata', [ $newMeta, $params ]);
             } catch (\Exception $e) {
             }
             

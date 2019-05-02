@@ -139,12 +139,21 @@ class RenderPostProcessHook
                     'content' => $url
                 );
             }
+    
+            try {
+                list($params, $metaArray) = $signalSlotDispatcher->dispatch(__CLASS__, 'metadataAfterViewhelperdata', [ $params, $metaArray ]);
+            } catch (\Exception $e) {
+            }
+            
 
             if (isset($metaArray['og:url']) && isset($metaArray['og:url']['content']) && (!isset($settings['disableCanonical']) || !$settings['disableCanonical'])) {
                 $newMeta[] = '<link rel="canonical" href="' . $metaArray['og:url']['content'] . '" />';
             }
-
-
+    
+    
+            
+            
+            
             if ($GLOBALS['TSFE']->page['no_search']) {
                 $newMeta[] = '<META NAME="ROBOTS" CONTENT="NOINDEX,FOLLOW">';
             }

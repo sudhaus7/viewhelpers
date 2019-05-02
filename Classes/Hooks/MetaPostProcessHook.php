@@ -41,7 +41,9 @@ class MetaPostProcessHook
             ksort($GLOBALS['SUDHAUS7_META_REGISTRY']);
             foreach ($GLOBALS['SUDHAUS7_META_REGISTRY'] as $key=>$value) {
                 if (strpos($key, 'image')!==false) {
-                    $value = $conf['params']['baseUrl'].$value;
+                    if (substr($value,0,4)!='http') {
+                        $value = $conf['params']['baseUrl'] . $value;
+                    }
                 }
                 list($prop, $key) = self::checkType($key);
                 $aMeta[$key] = array(

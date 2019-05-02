@@ -18,7 +18,7 @@ $EM_CONF[$_EXTKEY] = array(
     'clearCacheOnLoad' => 0,
     'lockType' => '',
     'author_company' => '',
-    'version' => '1.0.37',
+    'version' => '1.0.38',
     
     'constraints' => array(
         'depends' => array(
